@@ -13,7 +13,7 @@ export default function newRow(req, res) {
     const subCategory = (body.subCategory || '').toLowerCase()
 
     const newLine = `${body.category},${subCategory},${body.opex},${body.date},${sign}${body.sum}\n`
-    fs.appendFileSync('./bruh.csv', newLine, { encoding: 'utf-8' })
+    fs.appendFileSync('./dbase/bruh.csv', newLine, { encoding: 'utf-8' })
 
     res.status(200).json()
 }

@@ -16,5 +16,4 @@ dist-ssr
 *.sw?
 
 # DB
-bruh.csv
 /dbase

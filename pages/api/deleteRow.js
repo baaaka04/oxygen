@@ -2,14 +2,14 @@ import fs from 'fs';
 import { getLastNTransactions } from '../../utils/utils';
 
 export default function deleteRow(req, res) {
-    const file = fs.readFileSync("./bruh.csv", { encoding: 'utf-8' })
+    const file = fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
     const transactions = file
         .trim()
         .split('\n')
         .slice(0, -1)
         .join('\n')
         .concat('\n')
-    fs.writeFileSync('./bruh.csv', transactions)
+    fs.writeFileSync('./dbase/bruh.csv', transactions)
 
     res.status(201).json(
         getLastNTransactions(5)
