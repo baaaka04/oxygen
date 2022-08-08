@@ -12,7 +12,7 @@ export function delTrs() {
 }
 
 export function getLastNTransactions(n) {
-    const file = fs.readFileSync("./dbasebruh.csv", { encoding: 'utf-8' })
+    const file = fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
     const transactions = file.trim().split('\n')
     const shortTrs = transactions.slice(transactions.length - n)
 
