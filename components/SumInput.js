@@ -51,19 +51,19 @@ const SumInput = ({ inputValue, setInputValue }) => {
     return (
         <div className="flex flex-col items-center my-3">
             {visible ?
-                <div className="flex justify-between w-11/12 mb-2">
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-900 rounded hover:bg-indigo-700" onClick={onPressOperation}>+</button>
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-900 rounded hover:bg-indigo-700" onClick={onPressOperation}>-</button>
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-900 rounded hover:bg-indigo-700" onClick={onPressOperation}>/</button>
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-900 rounded hover:bg-indigo-700" onClick={onPressOperation}>*</button>
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-900 rounded hover:bg-indigo-700" onClick={onPressOperation}>=</button>
-                    <button type="button" className="w-full h-10 m-1 text-indigo-200 bg-indigo-500 rounded hover:bg-indigo-700" onClick={onPressC}>C</button>
+                <div className="flex justify-between w-full gap-1 mb-2">
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>+</button>
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>-</button>
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>/</button>
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>*</button>
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>=</button>
+                    <button type="button" className="h-10 text-indigo-200 bg-indigo-500 rounded grow" onClick={onPressC}>C</button>
                 </div>
                 : null}
 
-            <div className="flex items-center w-11/12 h-9 bg-slate-700">
+            <div className="flex items-center w-full rounded-md bg-slate-700 ">
                 <input
-                    className="w-full text-2xl text-center text-indigo-200 h-9 bg-slate-700 placeholder:text-slate-500"
+                    className="text-2xl text-center text-indigo-200 grow h-11 bg-slate-700 placeholder:text-slate-500"
                     placeholder="cумма"
                     name="sum"
                     type="number"
@@ -74,7 +74,10 @@ const SumInput = ({ inputValue, setInputValue }) => {
                     ref={ref}
                     onFocus={e => e.target.select()}
                 />
-                <CalcSVG className="p-1 cursor-pointer h-9 w-9" onClick={() => setVisible(!visible)} />
+                <CalcSVG className="p-1 cursor-pointer h-9 w-9" onClick={() => {
+                    setVisible(!visible)
+                    console.log(visible);
+                }} />
             </div>
 
         </div>

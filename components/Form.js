@@ -66,117 +66,125 @@ export default function Form({ table, setTable, frequentTrs }) {
 
 
     return (
-        <form onSubmit={onSubmit}>
-            <div className="flex justify-center">
-                <select className="w-11/12 text-2xl text-center text-indigo-200 h-9 bg-slate-700" name="category" value={categoryValue} onChange={e => setCategoryValue(e.target.value)}>
-                    <option>питание</option>
-                    <option>транспорт</option>
-                    <option>здоровье</option>
-                    <option>ЖКХ</option>
-                    <option>одежда</option>
-                    <option>развлечения</option>
-                    <option>подарки</option>
-                    <option>бытовуха</option>
-                    <option>интернет и связь</option>
-                    <option>прочее</option>
-                    <option>животные</option>
-                    <option>здоровье</option>
-                    <option>доход</option>
-                </select>
-            </div>
+        <form
+            className="flex justify-center"
+            onSubmit={onSubmit}>
+            <div className="w-11/12">
+                <div>
+                    <select
+                        className="w-full pl-5 text-2xl text-indigo-200 rounded-md datepicker h-11 bg-slate-700" //padding 1.25rem bcs align-text:center doesnt work on iOS
+                        name="category"
+                        value={categoryValue}
+                        onChange={e => setCategoryValue(e.target.value)}
+                    >
+                        <option>питание</option>
+                        <option>транспорт</option>
+                        <option>здоровье</option>
+                        <option>ЖКХ</option>
+                        <option>одежда</option>
+                        <option>развлечения</option>
+                        <option>подарки</option>
+                        <option>бытовуха</option>
+                        <option>интернет и связь</option>
+                        <option>прочее</option>
+                        <option>животные</option>
+                        <option>здоровье</option>
+                        <option>доход</option>
+                    </select>
+                </div>
 
-            <div className="flex justify-center my-3">
-                <input
-                    className="w-11/12 text-2xl text-center text-indigo-200 h-9 bg-slate-700 placeholder:text-slate-500"
-                    placeholder="наименование"
-                    name="subCategory"
-                    type="text"
-                    value={subCategoryValue}
-                    onChange={e => setSubCategoryValue(e.target.value)}
+                <div className="flex justify-center my-3">
+                    <input
+                        className="w-full text-2xl text-center text-indigo-200 rounded-md h-11 bg-slate-700 placeholder:text-slate-500"
+                        placeholder="наименование"
+                        name="subCategory"
+                        type="text"
+                        value={subCategoryValue}
+                        onChange={e => setSubCategoryValue(e.target.value)}
+                    />
+                </div>
+
+                <div
+                    className="mb-3"
+                    onChange={event => setInvest(event.target.value)}>
+                    <ul className="flex justify-between w-full gap-3">
+                        <li className="flex w-full">
+                            <input
+                                className="z-auto hidden opacity-0 peer"
+                                type="radio"
+                                id="huey"
+                                name="opex"
+                                value="опер"
+                                readOnly
+                                checked={invest === "опер"}
+                            />
+                            <label
+                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                htmlFor="huey"
+                            >опер</label>
+                        </li>
+
+                        <li className="flex w-full">
+                            <input
+                                className="z-auto hidden opacity-0 peer"
+                                type="radio"
+                                id="dewey"
+                                name="opex"
+                                value="доход"
+                                readOnly
+                                checked={invest === "доход"}
+                            />
+                            <label
+                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                htmlFor="dewey"
+                            >доход</label>
+                        </li>
+
+                        <li className="flex w-full">
+                            <input
+                                className="z-auto hidden opacity-0 peer"
+                                type="radio"
+                                id="louie"
+                                name="opex"
+                                value="инвест"
+                                readOnly
+                                checked={invest === "инвест"}
+                            />
+                            <label
+                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                htmlFor="louie"
+                            >инвест</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="flex justify-center mb-3">
+                    <input
+                        className="w-full text-2xl text-center text-indigo-200 rounded-lg h-11 bg-slate-700 datepicker"
+                        name="date"
+                        type="date"
+                        value={date}
+                        onChange={e => setDate(e.target.value)}
+                    />
+                </div>
+                <HotKeys
+                    freqTrs={frequentTrs}
+                    onPressHotkey={onPressHotkey}
                 />
-            </div>
-
-            <div
-                className="w-11/12 m-auto mb-3"
-                onChange={event => setInvest(event.target.value)}>
-                <ul className="flex justify-between w-full gap-3">
-                    <li className="flex w-full">
-                        <input
-                            className="z-auto hidden opacity-0 peer"
-                            type="radio"
-                            id="huey"
-                            name="opex"
-                            value="опер"
-                            readOnly
-                            checked={invest === "опер"}
-                        />
-                        <label
-                            className="flex items-center justify-center w-full m-1 text-2xl border-2 border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100 hover:bg-indigo-900"
-                            htmlFor="huey"
-                        >опер</label>
-                    </li>
-
-                    <li className="flex w-full">
-                        <input
-                            className="z-auto hidden opacity-0 peer"
-                            type="radio"
-                            id="dewey"
-                            name="opex"
-                            value="доход"
-                            readOnly
-                            checked={invest === "доход"}
-                        />
-                        <label
-                            className="flex items-center justify-center w-full m-1 text-2xl border-2 border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100 hover:bg-indigo-900"
-                            htmlFor="dewey"
-                        >доход</label>
-                    </li>
-
-                    <li className="flex w-full">
-                        <input
-                            className="z-auto hidden opacity-0 peer"
-                            type="radio"
-                            id="louie"
-                            name="opex"
-                            value="инвест"
-                            readOnly
-                            checked={invest === "инвест"}
-                        />
-                        <label
-                            className="flex items-center justify-center w-full m-1 text-2xl border-2 border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100 hover:bg-indigo-900"
-                            htmlFor="louie"
-                        >инвест</label>
-                    </li>
-                </ul>
-            </div>
-
-            <div className="flex justify-center mb-3">
-                <input
-                    className="w-11/12 text-2xl text-center text-indigo-200 h-9 bg-slate-700"
-                    name="date"
-                    type="date"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
+                <SumInput
+                    inputValue={inputValue}
+                    setInputValue={setInputValue}
                 />
-            </div>
-            <HotKeys
-                freqTrs={frequentTrs}
-                onPressHotkey={onPressHotkey}
-            />
-            <SumInput
-                inputValue={inputValue}
-                setInputValue={setInputValue}
-            />
-            <div className="flex justify-around w-11/12 m-auto">
-                <button
-                    className="w-9/12 h-20 m-1 text-2xl text-indigo-200 bg-indigo-600 rounded-lg hover:bg-indigo-700"
-                >сохранить</button>
+                <div className="flex justify-between gap-3">
+                    <button
+                        className="w-8/12 h-20 text-2xl text-indigo-200 bg-indigo-600 rounded-lg"
+                    >сохранить</button>
 
-                <button
-                    className="w-1/4 h-20 m-1 text-2xl text-indigo-200 bg-indigo-900 rounded-lg hover:bg-indigo-700"
-                    onClick={onPressDelete}>удалить</button>
+                    <button
+                        className="h-20 text-2xl text-indigo-200 bg-indigo-900 rounded-lg grow"
+                        onClick={onPressDelete}>удалить</button>
+                </div>
             </div>
-
         </form >
     )
 }
