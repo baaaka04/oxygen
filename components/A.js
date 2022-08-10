@@ -13,8 +13,6 @@ const A = ({
     const childClassName = child.props.className || ''
     const [className, setClassName] = useState(childClassName)
 
-    console.log(props)
-
     useEffect(() => {
         // Check if the router fields are updated client-side
         if (isReady) {
