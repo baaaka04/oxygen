@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import React from "react";
-import CalcSVG from '../public/images/calculator.svg';
+import CalcSVG from '../public/icons/calculator.svg';
 
 const SumInput = ({ inputValue, setInputValue }) => {
     const [visible, setVisible] = useState(false);

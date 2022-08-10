@@ -14,16 +14,28 @@
 }
 
 html, body {
-height:100%;
-background-color: rgb(30 41 59);
+    height:100%;
+    background-color: rgb(30 41 59);
 }
 
 #__next {
-height: 100%;
+    height: 100%;
 }
 
 .datepicker {
     -webkit-appearance: none;
     text-align: center;
     text-align: -webkit-center;
+}
+
+.icon > svg > path {
+    fill: rgb(199 210 254);
+}
+
+.active > div {
+    background-color: rgb(79, 70, 229, 0.5);
+}
+
+.active {
+    color: rgb(199 210 254);  
 }

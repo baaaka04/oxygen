@@ -31,6 +31,7 @@ export default function Form({ table, setTable, frequentTrs }) {
         let newRow = { ...data }
         newRow.date = newRow.date.slice(5)
         if (newRow.opex !== "доход") newRow.sum = "-" + newRow.sum
+        newRow.subCategory = newRow.subCategory.toLowerCase()
         newFiveRows.push(newRow)
 
         setTable(newFiveRows)
