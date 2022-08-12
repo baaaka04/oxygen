@@ -29,10 +29,14 @@ export async function getServerSideProps({ req, res }) {
 
 const PieChart = ({ pieChartData }) => {
     const [pieData, setPieData] = useState(pieChartData)
+    const pieSizeX = 190
+    const pieSizeY = 130
+    const centerX = pieSizeX / 2
+    const centerY = pieSizeY / 2
 
     return (
         <MainContainer>
-            <div className="flex flex-col items-center w-11/12 text-xs">
+            <div className="w-full max-w-2xl">
                 <Pie
                     data={pieData}
                     lineWidth={30}
@@ -48,9 +52,11 @@ const PieChart = ({ pieChartData }) => {
                         fill: 'rgb(199 210 254)',
                         fontWeight: 600,
                     }}
-                    viewBoxSize={[190, 130]}
-                    center={[95, 70]}
+                    viewBoxSize={[pieSizeX, pieSizeY]}
+                    center={[centerX, centerY]}
                 />
+            </div>
+            <div className="flex flex-col items-center w-11/12 text-xs">
                 <DatePicker
                     setPieData={setPieData}
                 />
