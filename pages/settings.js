@@ -23,7 +23,7 @@ const Settings = () => {
 
     return (
         <MainContainer>
-            <h1>Settings</h1>
+            <h1 className="mt-40">Settings</h1>
         </MainContainer>
     );
 };

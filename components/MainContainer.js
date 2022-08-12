@@ -12,7 +12,7 @@ export default function MainContainer({ children }) {
             icon: <HomeSVG />
         },
         {
-            href: '/users',
+            href: '/piechart',
             text: 'Анализ',
             icon: <PieChartSVG />
         },

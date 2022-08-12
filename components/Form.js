@@ -45,7 +45,6 @@ export default function Form({ table, setTable, frequentTrs }) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Basic ${localStorage.getItem("user")}`,
             },
             body: JSON.stringify(data),
         })
@@ -57,9 +56,6 @@ export default function Form({ table, setTable, frequentTrs }) {
 
         fetch("/api/deleteRow", {
             method: "DELETE",
-            headers: {
-                Authorization: `Basic ${localStorage.getItem("user")}`,
-            },
         })
             .then(res => res.json())
             .then(data => setTable(data));
