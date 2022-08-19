@@ -6,7 +6,7 @@ export function PieTable({ pieData }) {
 
     return (
         <table className="w-full mb-4 border border-indigo-800">
-            <thead className="bg-slate-700 h-9">
+            <thead className="bg-slate-700 h-9 py-1">
                 <tr>
                     <th className="px-1 border border-indigo-800">Категория</th>
                     <th className="px-1 border border-indigo-800">Сумма, руб.</th>

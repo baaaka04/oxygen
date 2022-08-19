@@ -1,4 +1,5 @@
 import { useState } from "react"
+import ArrowSVG from '../public/icons/arrow.svg'
 
 async function fetchPieData(month, year) {
     return fetch('/api/pieData', {
@@ -54,9 +55,34 @@ export function DatePicker({ setPieData }) {
             .then(data => setPieData(data))
     }
 
+    function swipeMonth(e) {
+        const btnValue = e.currentTarget.dataset.num
+        let newMonth = (Number(month)+Number(btnValue)).toString().padStart(2, '0')
+        let selectedYear = year
+        switch(newMonth) {
+            case '00':
+                newMonth = '12'
+                selectedYear--
+                break;
+            case '13':
+                newMonth = '01'
+                selectedYear++
+                break;
+        }
+        setMonth(newMonth)
+        setYear(String(selectedYear))
+        fetchPieData(newMonth, String(selectedYear))
+            .then(data => setPieData(data))
+    }
+
     return (
         <div className="flex flex-col items-center w-full">
-            <button className="px-5 py-2 mb-3 bg-indigo-900 rounded-lg" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>
+            <div className="flex justify-center items-center top-1 mb-3 bg-indigo-900 rounded-full icon">
+                <ArrowSVG data-num="-1" className="cursor-pointer w-16 h-4" onClick={swipeMonth}/>
+                <button className="px-5 py-2 border-x border-indigo-700" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>
+                <ArrowSVG data-num="1" className="rotate-180 cursor-pointer w-16 h-4" onClick={swipeMonth}/>
+
+            </div>
             {isSelectVisible ?
                 <div className="absolute top-0 flex flex-col justify-center w-full h-full" onClick={() => setVisible(!isSelectVisible)}>
                     <div className="w-full p-4 border-y-2 border-sky-300 bg-slate-800 ">
@@ -64,7 +90,7 @@ export function DatePicker({ setPieData }) {
                             <div className={year == '2021' ? activeBtnClass : btnClass} data-year="2021" onClick={onClickYear}>2021</div>
                             <div className={year == '2022' ? activeBtnClass : btnClass} data-year="2022" onClick={onClickYear}>2022</div>
                         </div>
-                        <div className="grid w-full grid-cols-4 gap-2">
+                        <div className="grid w-full grid-cols-3 gap-2">
                             {months.map(item => {
                                 return (
                                     <div className={month == item.value ? activeBtnClass : btnClass} data-month={item.value} onClick={onClickMonth}>{item.title}</div>

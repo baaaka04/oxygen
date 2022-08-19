@@ -2,11 +2,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import React, { useState, useEffect, Children } from 'react';
 
-const A = ({
-    children,
-    activeClassName,
-    ...props
-}) => {
+const A = ({ children, activeClassName, ...props }) => {
     const { asPath, isReady } = useRouter()
 
     const child = Children.only(children)
