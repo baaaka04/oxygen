@@ -6,11 +6,11 @@ export function PieTable({ pieData }) {
 
     return (
         <table className="w-full mb-4 border border-indigo-800">
-            <thead className="bg-slate-700 h-9 py-1">
+            <thead className="bg-slate-700">
                 <tr>
-                    <th className="px-1 border border-indigo-800">Категория</th>
-                    <th className="px-1 border border-indigo-800">Сумма, руб.</th>
-                    <th className="px-1 border border-indigo-800">Процент</th>
+                    <th className="p-1 border border-indigo-800">Категория</th>
+                    <th className="p-1 border border-indigo-800">Сумма, руб.</th>
+                    <th className="p-1 border border-indigo-800">Процент</th>
                 </tr>
             </thead>
 

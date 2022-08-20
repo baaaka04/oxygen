@@ -69,7 +69,7 @@ export default function Form({ table, setTable, frequentTrs }) {
             <div className="w-11/12">
                 <div>
                     <select
-                        className="w-full pl-5 text-2xl text-indigo-200 rounded-md datepicker h-11 bg-slate-700" //padding 1.25rem bcs align-text:center doesnt work on iOS
+                        className="w-full pl-5 text-2xl dark:text-indigo-200 text-blue-800 rounded-md datepicker h-11 dark:bg-slate-700 bg-blue-100" //padding 1.25rem bcs align-text:center doesnt work on iOS
                         name="category"
                         value={categoryValue}
                         onChange={e => setCategoryValue(e.target.value)}
@@ -92,7 +92,7 @@ export default function Form({ table, setTable, frequentTrs }) {
 
                 <div className="flex justify-center my-3">
                     <input
-                        className="w-full text-2xl text-center text-indigo-200 rounded-md h-11 bg-slate-700 placeholder:text-slate-500"
+                        className="w-full text-2xl text-center dark:text-indigo-200 text-blue-800 bg-blue-100 rounded-md h-11 dark:bg-slate-700 dark:placeholder:text-slate-500 placeholder:text-slate-300"
                         placeholder="наименование"
                         name="subCategory"
                         type="text"
@@ -116,7 +116,7 @@ export default function Form({ table, setTable, frequentTrs }) {
                                 checked={invest === "опер"}
                             />
                             <label
-                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                className="flex items-center justify-center w-full text-2xl peer-checked:border text-slate-300 bg-blue-100 rounded-lg cursor-pointer dark:text-slate-500 h-14 dark:bg-slate-700 dark:peer-checked:text-indigo-200 dark:peer-checked:border-indigo-100 peer-checked:border-blue-500 peer-checked:text-blue-800"
                                 htmlFor="huey"
                             >опер</label>
                         </li>
@@ -132,7 +132,7 @@ export default function Form({ table, setTable, frequentTrs }) {
                                 checked={invest === "доход"}
                             />
                             <label
-                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                className="flex items-center justify-center w-full text-2xl peer-checked:border text-slate-300 bg-blue-100 rounded-lg cursor-pointer dark:text-slate-500 h-14 dark:bg-slate-700 dark:peer-checked:text-indigo-200 dark:peer-checked:border-indigo-100 peer-checked:border-blue-500 peer-checked:text-blue-800"
                                 htmlFor="dewey"
                             >доход</label>
                         </li>
@@ -148,7 +148,7 @@ export default function Form({ table, setTable, frequentTrs }) {
                                 checked={invest === "инвест"}
                             />
                             <label
-                                className="flex items-center justify-center w-full text-2xl border border-indigo-900 rounded-lg cursor-pointer text-slate-500 h-14 bg-slate-700 peer-checked:text-indigo-200 peer-checked:border-indigo-100"
+                                className="flex items-center justify-center w-full text-2xl peer-checked:border text-slate-300 bg-blue-100 rounded-lg cursor-pointer dark:text-slate-500 h-14 dark:bg-slate-700 dark:peer-checked:text-indigo-200 dark:peer-checked:border-indigo-100  peer-checked:border-blue-500 peer-checked:text-blue-800"
                                 htmlFor="louie"
                             >инвест</label>
                         </li>
@@ -157,7 +157,7 @@ export default function Form({ table, setTable, frequentTrs }) {
 
                 <div className="flex justify-center mb-3">
                     <input
-                        className="w-full text-2xl text-center text-indigo-200 rounded-lg h-11 bg-slate-700 datepicker"
+                        className="w-full text-2xl text-center dark:text-indigo-200 rounded-lg h-11 text-blue-800 bg-blue-100 dark:bg-slate-700 datepicker"
                         name="date"
                         type="date"
                         value={date}
@@ -174,11 +174,11 @@ export default function Form({ table, setTable, frequentTrs }) {
                 />
                 <div className="flex justify-between gap-3">
                     <button
-                        className="w-8/12 h-20 text-2xl text-indigo-200 bg-indigo-600 rounded-lg"
+                        className="w-8/12 h-20 text-2xl bg-blue-400/50 text-blue-900 dark:text-indigo-200 dark:bg-indigo-600 rounded-lg"
                     >сохранить</button>
 
                     <button
-                        className="h-20 text-2xl text-indigo-200 bg-indigo-900 rounded-lg grow"
+                        className="h-20 text-2xl bg-blue-700/60 text-blue-900 dark:text-indigo-200 dark:bg-indigo-900 rounded-lg grow"
                         onClick={onPressDelete}>удалить</button>
                 </div>
             </div>

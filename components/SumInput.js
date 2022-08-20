@@ -52,18 +52,18 @@ const SumInput = ({ inputValue, setInputValue }) => {
         <div className="flex flex-col items-center my-3">
             {visible ?
                 <div className="flex justify-between w-full gap-1 mb-2">
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>+</button>
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>-</button>
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>/</button>
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>*</button>
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-900 rounded grow" onClick={onPressOperation}>=</button>
-                    <button type="button" className="h-10 text-indigo-200 bg-indigo-500 rounded grow" onClick={onPressC}>C</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>+</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>-</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>/</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>*</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>=</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-400/70 text-blue-800 dark:bg-indigo-500 rounded grow" onClick={onPressC}>C</button>
                 </div>
                 : null}
 
-            <div className="flex items-center w-full rounded-md bg-slate-700 ">
+            <div className="flex items-center w-full rounded-md bg-blue-100 dark:bg-slate-700 ">
                 <input
-                    className="text-2xl text-center text-indigo-200 grow h-11 bg-slate-700 placeholder:text-slate-500"
+                    className="text-2xl text-center bg-blue-100 text-blue-800 placeholder:text-slate-300 dark:text-indigo-200 grow h-11 dark:bg-slate-700 dark:placeholder:text-slate-500"
                     placeholder="cумма"
                     name="sum"
                     type="number"
