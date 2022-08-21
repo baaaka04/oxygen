@@ -34,15 +34,15 @@ export default function MainContainer({ children }) {
     }, [])
 
     return (
-        <div className="">
+        <>
             <div className="flex flex-col items-center">
                 {children}
             </div>
-            <div className="fixed bottom-0 flex items-center justify-around w-full h-16 bg-slate-700">
+            <div className="fixed bottom-0 flex items-center justify-around w-full h-16 dark:bg-slate-700 bg-slate-300">
                 {buttons.map(btn => {
                     return (
-                        <A key={btn.text} href={btn.href} activeClassName="active" className="bg-slate-300">
-                            <div className="flex flex-col items-center m-auto text-xs text-slate-500 grow">
+                        <A key={btn.text} href={btn.href} activeClassName="active">
+                            <div className="flex flex-col items-center m-auto text-xs text-slate-500/50 grow">
                                 <div className="flex items-center justify-center transition-colors duration-500 rounded-full w-11 h-11">
                                     <div className="w-8 h-8 icon">
                                         {btn.icon}
@@ -55,6 +55,6 @@ export default function MainContainer({ children }) {
                 }
                 )}
             </div>
-        </div>
+        </>
     )
 }

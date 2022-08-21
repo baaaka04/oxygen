@@ -26,14 +26,23 @@ html, body {
     text-align: -webkit-center;
 }
 
-.icon > svg > path {
+.dark .icon > svg > path {
     fill: rgb(199 210 254);
 }
-
-.active > div {
-    background-color: rgb(79, 70, 229, 0.5);
+.icon > svg > path {
+    fill: rgb(30 58 138);
 }
 
-.active {
+.dark .active > div {
+    background-color: rgb(79, 70, 229, 0.5);
+}
+.active > div {
+    background-color: rgb(96 165 250 / 0.5);
+}
+
+.dark .active {
     color: rgb(199 210 254);  
+}
+.active {
+    color: rgb(30 58 138);  
 }

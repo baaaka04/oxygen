@@ -2,7 +2,7 @@ import MainContainer from "../components/MainContainer";
 import isAuthorized from "../utils/auth";
 import { getMonthlyExpenses } from "../utils/utils";
 import { PieChart as Pie } from 'react-minimal-pie-chart';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { PieTable } from "../components/PieTable";
 
@@ -49,8 +49,8 @@ const PieChart = ({ pieChartData }) => {
                     labelPosition={110}
                     labelStyle={{
                         fontSize: '5px',
-                        fill: 'rgb(199 210 254)',
-                        fontWeight: 600,
+                        fill: 'rgb(96 165 250)',
+                        fontWeight: 500,
                     }}
                     viewBoxSize={[pieSizeX, pieSizeY]}
                     center={[centerX, centerY]}
