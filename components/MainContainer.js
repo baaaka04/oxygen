@@ -2,6 +2,7 @@ import A from "./A";
 import PieChartSVG from '../public/icons/pie-chart.svg';
 import SettingSVG from '../public/icons/settings.svg';
 import HomeSVG from '../public/icons/sheet.svg';
+import { useEffect } from "react";
 
 export default function MainContainer({ children }) {
 
@@ -22,6 +23,15 @@ export default function MainContainer({ children }) {
             icon: <SettingSVG />
         },
     ]
+
+    useEffect(() => {
+        const userTheme = localStorage.getItem("theme")
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches // true if system theme dark
+
+        if (userTheme === 'dark' || (!userTheme && systemTheme)) {
+            document.documentElement.classList.add('dark', 'bg-slate-800', 'text-indigo-200')
+        }
+    }, [])
 
     return (
         <div className="">
