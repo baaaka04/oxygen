@@ -57,7 +57,7 @@ const SumInput = ({ inputValue, setInputValue }) => {
                     <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>/</button>
                     <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>*</button>
                     <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>=</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-400/70 text-blue-800 dark:bg-blue-900 rounded grow" onClick={onPressC}>C</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-400/70 text-blue-800 dark:bg-blue-500/80 rounded grow" onClick={onPressC}>C</button>
                 </div>
                 : null}
 

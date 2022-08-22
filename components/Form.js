@@ -174,11 +174,11 @@ export default function Form({ table, setTable, frequentTrs }) {
                 />
                 <div className="flex justify-between gap-3">
                     <button
-                        className="w-8/12 h-20 text-2xl text-blue-900 rounded-lg bg-blue-400/50 dark:text-indigo-200 dark:bg-blue-600"
+                        className="w-8/12 h-20 text-2xl text-blue-900 rounded-lg bg-blue-400/50 dark:text-indigo-200 dark:bg-blue-600/70"
                     >сохранить</button>
 
                     <button
-                        className="h-20 text-2xl text-blue-900 rounded-lg bg-blue-700/60 dark:text-indigo-200 grow"
+                        className="h-20 text-2xl text-blue-900 rounded-lg bg-blue-700/60 dark:bg-blue-500/30 dark:text-indigo-200 grow"
                         onClick={onPressDelete}>удалить</button>
                 </div>
             </div>
