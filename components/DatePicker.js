@@ -77,7 +77,7 @@ export function DatePicker({ setPieData }) {
 
     return (
         <div className="flex flex-col items-center w-full">
-            <div className="flex items-center justify-center mb-3 text-blue-900 rounded-full top-1 dark:text-indigo-200 dark:bg-blue-900 bg-blue-400/50 icon">
+            <div className="flex items-center justify-center mb-3 text-blue-900 rounded-full top-1 dark:text-indigo-200 dark:bg-blue-500/30 bg-blue-400/50 icon">
                 <ArrowSVG data-num="-1" className="w-16 h-4 cursor-pointer" fill="rgb(59 130 246 / 0.7)" onClick={swipeMonth} />
                 <button className="px-5 py-2 border-blue-500/70 dark:border-blue-600 border-x" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>
                 <ArrowSVG data-num="1" className="w-16 h-4 rotate-180 cursor-pointer" fill="rgb(59 130 246 / 0.7)" onClick={swipeMonth} />

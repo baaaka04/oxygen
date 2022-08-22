@@ -64,7 +64,7 @@ export default function Form({ table, setTable, frequentTrs }) {
 
     return (
         <form
-            className="flex justify-center"
+            className="flex justify-center mb-28"
             onSubmit={onSubmit}>
             <div className="w-11/12">
                 <div>

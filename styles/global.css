@@ -34,7 +34,7 @@ html, body {
 }
 
 .dark .active > div {
-    background-color: rgb(79, 70, 229, 0.5);
+    background-color: rgb(37, 99, 235, 0.5);
 }
 .active > div {
     background-color: rgb(96 165 250 / 0.5);

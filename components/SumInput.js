@@ -52,12 +52,12 @@ const SumInput = ({ inputValue, setInputValue }) => {
         <div className="flex flex-col items-center my-3">
             {visible ?
                 <div className="flex justify-between w-full gap-1 mb-2">
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>+</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>-</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>/</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>*</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-indigo-900 rounded grow" onClick={onPressOperation}>=</button>
-                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-400/70 text-blue-800 dark:bg-indigo-500 rounded grow" onClick={onPressC}>C</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>+</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>-</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>/</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>*</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-100 text-blue-800 dark:bg-blue-600/70 rounded grow" onClick={onPressOperation}>=</button>
+                    <button type="button" className="h-10 dark:text-indigo-200 bg-blue-400/70 text-blue-800 dark:bg-blue-900 rounded grow" onClick={onPressC}>C</button>
                 </div>
                 : null}
 
