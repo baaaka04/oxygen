@@ -1,0 +1,9 @@
+{
+    "name": "Accounting App",
+    "short_name": "Accounting App",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#fdfdfd",
+    "theme_color": "#db4938",
+    "orientation": "portrait-primary"
+}
