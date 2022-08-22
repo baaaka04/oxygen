@@ -37,7 +37,7 @@ export function DatePicker({ setPieData }) {
     const [isSelectVisible, setVisible] = useState(false)
 
     const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-pointer grow"
-    const activeBtnClass = btnClass + " bg-indigo-900"
+    const activeBtnClass = btnClass + " dark:bg-blue-500/30 bg-blue-400/50"
 
     function onClickMonth(e) {
         e.stopPropagation()
@@ -85,7 +85,7 @@ export function DatePicker({ setPieData }) {
             </div>
             {isSelectVisible ?
                 <div className="absolute top-0 flex flex-col justify-center w-full h-full" onClick={() => setVisible(!isSelectVisible)}>
-                    <div className="w-full p-4 border-y-2 border-sky-300 bg-slate-800 ">
+                    <div className="w-full p-4 border-y-2 border-sky-300 dark:bg-slate-800 bg-white ">
                         <div className="flex w-full gap-2 mb-2 flex-between">
                             <div className={year == '2021' ? activeBtnClass : btnClass} data-year="2021" onClick={onClickYear}>2021</div>
                             <div className={year == '2022' ? activeBtnClass : btnClass} data-year="2022" onClick={onClickYear}>2022</div>
