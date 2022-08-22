@@ -1,6 +1,6 @@
 import Router from "next/router";
 import { useState } from "react";
-import MainContainer from "../components/MainContainer";
+import ProfileSVG from "../public/icons/profile.svg"
 
 const Login = () => {
     const [pswValue, setPswValue] = useState('')
@@ -23,16 +23,18 @@ const Login = () => {
     }
 
     return (
-        <form className="flex flex-col items-center p-40" onSubmit={hadleSubmit}>
-            <h1 className="mb-4 text-xl">password</h1>
-            <input
-                className="pl-3 w-70 h-9 bg-slate-700"
-                type="password"
-                name="password"
-                value={pswValue}
-                onChange={(e) => setPswValue(e.target.value)}
-            />
-            <button className="px-5 mt-4 text-xl border rounded-lg">submit</button>
+        <form className="flex justify-center p-36 text-blue-900" onSubmit={hadleSubmit}>
+                <div className="w-28 h-28 bg-slate-700 rounded-full absolute flex items-center justify-center p-4"><ProfileSVG /></div>
+            <div className="flex flex-col items-center bg-blue-300/50 p-10 rounded-xl mt-14">
+                <span className="my-6 text-xl">Введите пароль</span>
+                <input
+                    className="pl-3 w-70 h-9 bg-slate-50"
+                    type="password"
+                    name="password"
+                    value={pswValue}
+                    onChange={(e) => setPswValue(e.target.value)}
+                    />
+            </div>
         </form>
     );
 };
