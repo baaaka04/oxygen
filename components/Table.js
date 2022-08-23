@@ -1,3 +1,4 @@
+import { addSpaceToNumber } from "../utils/finNumbers"
 
 export default function Table({ lastFiveTrs }) {
     return (
@@ -20,7 +21,7 @@ export default function Table({ lastFiveTrs }) {
                             <td className="border border-blue-500/70 dark:border-blue-800">{item.subCategory}</td>
                             <td className="border border-blue-500/70 dark:border-blue-800">{item.opex}</td>
                             <td className="border border-blue-500/70 dark:border-blue-800">{item.date}</td>
-                            <td className="border border-blue-500/70 dark:border-blue-800">{item.sum}</td>
+                            <td className="border border-blue-500/70 dark:border-blue-800">{addSpaceToNumber(item.sum)}</td>
                         </tr>
                     )
                 })}

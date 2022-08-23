@@ -1,18 +1,28 @@
 import fs from 'fs';
 
+const demo = process.env.Z
+function getFile() {
+    return (demo
+        ? fs.readFileSync("./dbase/bruh2.csv", { encoding: 'utf-8' })
+        : fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
+    )
+}
+
 export function delTrs() {
-    const file = fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
+    const file = getFile()
     const transactions = file
         .trim()
         .split('\n')
-        .slice(0, -2)
+        .slice(0, -1)
         .join('\n')
         .concat('\n')
-    fs.writeFileSync('./dbase/bruh.csv', transactions)
+    demo
+        ? fs.writeFileSync('./dbase/bruh2.csv', transactions)
+        : fs.writeFileSync('./dbase/bruh.csv', transactions)
 }
 
 export function getLastNTransactions(n) {
-    const file = fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
+    const file = getFile()
     const transactions = file.trim().split('\n')
     const shortTrs = transactions.slice(transactions.length - n)
 
@@ -21,7 +31,7 @@ export function getLastNTransactions(n) {
 
 export function getMonthlyExpenses(month = '01', year = '2022') {
 
-    const file = fs.readFileSync("./dbase/bruh.csv", { encoding: 'utf-8' })
+    const file = getFile()
     const transactions = file
         .trim()
         .split('\n')

@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 50401"
+    "start": "next start -p 50401",
+    "demo": "set Z=V && next start -p 50402"
   },
   "keywords": [],
   "author": "",
