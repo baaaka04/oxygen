@@ -10,7 +10,7 @@ export default function newRow(req, res) {
     }
 
     // проверка нужна чтобы не было ошибки
-    const subCategory = (body.subCategory || '').toLowerCase()
+    const subCategory = (body.subCategory || '(пусто)').toLowerCase()
 
     const newLine = `${body.category},${subCategory},${body.opex},${body.date},${sign}${body.sum}\n`
     demo
