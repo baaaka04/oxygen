@@ -30,14 +30,29 @@ const months = [
     { title: 'декабрь', value: '12' },
 ]
 
+const curMonthNumber = new Date().toJSON().slice(5, 7)
+const curYearNumber = new Date().getFullYear().toString()
+
 export function DatePicker({ setPieData }) {
 
-    const [month, setMonth] = useState(new Date().toJSON().slice(5, 7))
-    const [year, setYear] = useState(new Date().getFullYear().toString())
+    const [month, setMonth] = useState(curMonthNumber)
+    const [year, setYear] = useState(curYearNumber)
     const [isSelectVisible, setVisible] = useState(false)
 
     const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-pointer grow"
-    const activeBtnClass = btnClass + " dark:bg-blue-500/30 bg-blue-400/50"
+    const activeBtnClass = " dark:bg-blue-500/30 bg-blue-400/50"
+
+    function getBtnStyle(value) {
+        return btnClass + (
+            month === value || year === value
+                ? activeBtnClass
+                : ""
+        ) + (
+                curMonthNumber === value || curYearNumber === value
+                    ? " bg-slate-700/70"
+                    : ""
+            )
+    }
 
     function onClickMonth(e) {
         e.stopPropagation()
@@ -87,13 +102,13 @@ export function DatePicker({ setPieData }) {
                 <div className="absolute top-0 flex flex-col justify-center w-full h-full" onClick={() => setVisible(!isSelectVisible)}>
                     <div className="w-full p-4 border-y-2 border-sky-300 dark:bg-slate-800 bg-white ">
                         <div className="flex w-full gap-2 mb-2 flex-between">
-                            <div className={year == '2021' ? activeBtnClass : btnClass} data-year="2021" onClick={onClickYear}>2021</div>
-                            <div className={year == '2022' ? activeBtnClass : btnClass} data-year="2022" onClick={onClickYear}>2022</div>
+                            <div className={getBtnStyle('2021')} data-year="2021" onClick={onClickYear}>2021</div>
+                            <div className={getBtnStyle('2022')} data-year="2022" onClick={onClickYear}>2022</div>
                         </div>
                         <div className="grid w-full grid-cols-3 gap-2">
                             {months.map(item => {
                                 return (
-                                    <div className={month == item.value ? activeBtnClass : btnClass} data-month={item.value} onClick={onClickMonth}>{item.title}</div>
+                                    <div className={getBtnStyle(item.value)} data-month={item.value} onClick={onClickMonth}>{item.title}</div>
                                 )
                             })}
                         </div>
