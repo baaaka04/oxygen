@@ -32,6 +32,9 @@ const months = [
 
 const curMonthNumber = new Date().toJSON().slice(5, 7)
 const curYearNumber = new Date().getFullYear().toString()
+const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-pointer grow"
+const activeBtnClass = " dark:bg-blue-500/30 bg-blue-400/50"
+const currnetBtnClass = " dark:bg-slate-700/70 bg-blue-200/30"
 
 export function DatePicker({ setPieData }) {
 
@@ -39,19 +42,15 @@ export function DatePicker({ setPieData }) {
     const [year, setYear] = useState(curYearNumber)
     const [isSelectVisible, setVisible] = useState(false)
 
-    const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-pointer grow"
-    const activeBtnClass = " dark:bg-blue-500/30 bg-blue-400/50"
 
     function getBtnStyle(value) {
         return btnClass + (
             month === value || year === value
                 ? activeBtnClass
-                : ""
-        ) + (
-                curMonthNumber === value || curYearNumber === value
-                    ? " bg-slate-700/70"
+                : curMonthNumber === value || curYearNumber === value
+                    ? currnetBtnClass
                     : ""
-            )
+        )
     }
 
     function onClickMonth(e) {
