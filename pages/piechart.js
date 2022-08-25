@@ -2,7 +2,7 @@ import MainContainer from "../components/MainContainer";
 import isAuthorized from "../utils/auth";
 import { getMonthlyExpenses } from "../utils/utils";
 import { PieChart as Pie } from 'react-minimal-pie-chart';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { PieTable } from "../components/PieTable";
 

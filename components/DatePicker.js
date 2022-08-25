@@ -99,7 +99,7 @@ export function DatePicker({ setPieData }) {
             </div>
             {isSelectVisible ?
                 <div className="absolute top-0 flex flex-col justify-center w-full h-full" onClick={() => setVisible(!isSelectVisible)}>
-                    <div className="w-full p-4 border-y-2 border-sky-300 dark:bg-slate-800 bg-white ">
+                    <div className="w-full p-4 bg-white border-y-2 border-sky-300 dark:bg-slate-800 ">
                         <div className="flex w-full gap-2 mb-2 flex-between">
                             <div className={getBtnStyle('2021')} data-year="2021" onClick={onClickYear}>2021</div>
                             <div className={getBtnStyle('2022')} data-year="2022" onClick={onClickYear}>2022</div>
@@ -107,7 +107,7 @@ export function DatePicker({ setPieData }) {
                         <div className="grid w-full grid-cols-3 gap-2">
                             {months.map(item => {
                                 return (
-                                    <div className={getBtnStyle(item.value)} data-month={item.value} onClick={onClickMonth}>{item.title}</div>
+                                    <div className={getBtnStyle(item.value)} data-month={item.value} key={`month${item.value}`} onClick={onClickMonth}>{item.title}</div>
                                 )
                             })}
                         </div>

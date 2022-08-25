@@ -29,7 +29,7 @@ export function getLastNTransactions(n) {
     return shortTrs
 }
 
-export function getMonthlyExpenses(month = '01', year = '2022') {
+export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year = new Date().getFullYear().toString()) {
 
     const file = getFile()
     const transactions = file
