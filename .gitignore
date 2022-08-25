@@ -17,3 +17,4 @@ dist-ssr
 
 # DB
 /dbase
+copy_db.js
