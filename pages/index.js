@@ -3,6 +3,7 @@ import Form from '../components/Form';
 import MainContainer from '../components/MainContainer';
 import Table from "../components/Table";
 import isAuthorized from '../utils/auth';
+import { getHotkeysNumber } from '../utils/getHoykeys';
 import { getLastNTransactions } from '../utils/utils';
 
 export async function getServerSideProps({ req, res }) {
@@ -48,7 +49,7 @@ export async function getServerSideProps({ req, res }) {
         .sort(([, a], [, b]) => b - a)
         .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
     frequentTrs = Object.keys(sortedtrs)
-        .slice(0, 8)
+        .slice(0, getHotkeysNumber())
         .map((i) => i.split(","));
     return {
         props: { frequentTrs, lastFiveTrs }, // will be passed to the page component as props

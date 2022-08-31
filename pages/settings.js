@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MainContainer from "../components/MainContainer";
 import isAuthorized from "../utils/auth";
+import { getHotkeysNumber } from "../utils/getHoykeys";
 
 export async function getServerSideProps({ req, res }) {
     // ----------- authorization
@@ -14,14 +15,16 @@ export async function getServerSideProps({ req, res }) {
         }
     }
     // ----------- authorization
+    const hotkeysNum = getHotkeysNumber()
     return {
-        props: {}, // will be passed to the page component as props
+        props: {hotkeysNum}, // will be passed to the page component as props
     }
 }
 
 
-const Settings = () => {
+const Settings = ({hotkeysNum}) => {
     const [userTheme, setUserTheme] = useState('...')
+    const [hotkeyNum, setHotkeyNum] = useState(hotkeysNum)
     useEffect(() => {
         setUserTheme(document.documentElement.classList.contains('dark') ? 'темная' : 'светлая')
     }, [])
@@ -38,13 +41,39 @@ const Settings = () => {
         return
     }
 
+    function setHotkeys (num) {
+        setHotkeyNum(num)
+        const params = {hotkey: num}
+
+        fetch("/api/settings", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(params),
+        })
+            // .then(res => { if (res.statusText !== "OK") setTable(tableMemo) }) // get data back if smthn wrong
+    }
+
     return (
         <MainContainer>
             <div className="flex flex-col items-center w-11/12 pt-8 text-4xl text-blue-800 dark:text-indigo-200">
-                <div className="flex justify-around w-full">
-                    <p>Тема приложения </p>
+
+                <div className="flex justify-between w-full mb-4">
+                    <p>Тема приложения</p>
                     <button className="w-24 bg-blue-100 rounded dark:bg-slate-500 " onClick={themeSwitch}>{userTheme}</button>
                 </div>
+
+                <div className="flex justify-between w-full mb-4">
+                    <p>Количество горячих клавиш</p>
+                    <button className="w-24 bg-blue-100 rounded dark:bg-slate-500 " onClick={() => setHotkeys(8)}>сброс</button>
+                    <select className="w-24 bg-blue-100 rounded dark:bg-slate-500 text-center" value={hotkeyNum} onChange={(e) => setHotkeys(e.target.value)}>
+                        {[...Array(7).keys()].map(i => {
+                            return <option>{i + 6}</option>
+                        })}
+                    </select>
+                </div>
+
             </div>
         </MainContainer>
     );

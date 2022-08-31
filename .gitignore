@@ -3,6 +3,7 @@ dist
 dist-ssr
 *.local
 /.next
+settings.json
 
 # Editor directories and files
 .vscode/*
