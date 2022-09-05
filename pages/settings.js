@@ -17,12 +17,12 @@ export async function getServerSideProps({ req, res }) {
     // ----------- authorization
     const hotkeysNum = getHotkeysNumber()
     return {
-        props: {hotkeysNum}, // will be passed to the page component as props
+        props: { hotkeysNum }, // will be passed to the page component as props
     }
 }
 
 
-const Settings = ({hotkeysNum}) => {
+const Settings = ({ hotkeysNum }) => {
     const [userTheme, setUserTheme] = useState('...')
     const [hotkeyNum, setHotkeyNum] = useState(hotkeysNum)
     useEffect(() => {
@@ -41,9 +41,9 @@ const Settings = ({hotkeysNum}) => {
         return
     }
 
-    function setHotkeys (num) {
+    function setHotkeys(num) {
         setHotkeyNum(num)
-        const params = {hotkey: num}
+        const params = { hotkey: num }
 
         fetch("/api/settings", {
             method: "POST",
@@ -52,7 +52,6 @@ const Settings = ({hotkeysNum}) => {
             },
             body: JSON.stringify(params),
         })
-            // .then(res => { if (res.statusText !== "OK") setTable(tableMemo) }) // get data back if smthn wrong
     }
 
     return (
@@ -66,8 +65,8 @@ const Settings = ({hotkeysNum}) => {
 
                 <div className="flex justify-between w-full mb-4">
                     <p>Количество горячих клавиш</p>
-                    <button className="w-24 bg-blue-100 rounded dark:bg-slate-500 " onClick={() => setHotkeys(8)}>сброс</button>
-                    <select className="w-24 bg-blue-100 rounded dark:bg-slate-500 text-center" value={hotkeyNum} onChange={(e) => setHotkeys(e.target.value)}>
+                    <button className="w-24 ml-auto bg-blue-100 rounded dark:bg-slate-500" onClick={() => setHotkeys(8)}>сброс</button>
+                    <select className="w-24 ml-2 text-center bg-blue-100 rounded dark:bg-slate-500" value={hotkeyNum} onChange={(e) => setHotkeys(e.target.value)}>
                         {[...Array(7).keys()].map(i => {
                             return <option>{i + 6}</option>
                         })}

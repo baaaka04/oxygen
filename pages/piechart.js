@@ -6,6 +6,19 @@ import { useState } from "react";
 import { DatePicker } from "../components/DatePicker";
 import { PieTable } from "../components/PieTable";
 
+
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+
 export async function getServerSideProps({ req, res }) {
     // ----------- authorization
     if (!isAuthorized(req)) {
@@ -34,10 +47,64 @@ const PieChart = ({ pieChartData }) => {
     const centerX = pieSizeX / 2
     const centerY = pieSizeY / 2
 
+    ChartJS.register(
+        CategoryScale,
+        LinearScale,
+        BarElement,
+        Title,
+        Tooltip,
+        Legend
+    );
+
+    const options = {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Chart.js Bar Chart - Stacked',
+            },
+        },
+        responsive: true,
+        scales: {
+            x: {
+                stacked: true,
+            },
+            y: {
+                stacked: true,
+            },
+        },
+    };
+
+    const labels = ['2021', '2022'];
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: labels.map(() => Math.random() * 1000),
+                backgroundColor: 'rgb(255, 99, 132)',
+            },
+            {
+                label: 'Dataset 2',
+                data: labels.map(() => Math.random() * 1000),
+                backgroundColor: 'rgb(75, 192, 192)',
+            },
+            {
+                label: 'Dataset 3',
+                data: labels.map(() => Math.random() * 1000),
+                backgroundColor: 'rgb(53, 162, 235)',
+            },
+        ],
+    };
+
+
+
     return (
         <MainContainer>
             <div className="w-full max-w-2xl">
-                <Pie
+                <Bar options={options} data={data} />
+
+                {/* <Pie
                     data={pieData}
                     lineWidth={30}
                     startAngle={330}
@@ -54,7 +121,7 @@ const PieChart = ({ pieChartData }) => {
                     }}
                     viewBoxSize={[pieSizeX, pieSizeY]}
                     center={[centerX, centerY]}
-                />
+                /> */}
             </div>
             <div className="flex flex-col items-center w-11/12 text-xs">
                 <DatePicker
