@@ -1,6 +1,6 @@
 import MainContainer from "../components/MainContainer";
 import isAuthorized from "../utils/auth";
-import { getMonthlyExpenses } from "../utils/utils";
+import { getBarChartData, getMonthlyExpenses } from "../utils/utils";
 import { PieChart as Pie } from 'react-minimal-pie-chart';
 import { useState } from "react";
 import { DatePicker } from "../components/DatePicker";
@@ -33,14 +33,15 @@ export async function getServerSideProps({ req, res }) {
     // ----------- authorization
 
     const pieChartData = getMonthlyExpenses()
+    const barChartData = getBarChartData()
 
     return {
-        props: { pieChartData },
+        props: { pieChartData, barChartData },
     }
 }
 
 
-const PieChart = ({ pieChartData }) => {
+const PieChart = ({ pieChartData, barChartData }) => {
     const [pieData, setPieData] = useState(pieChartData)
     const pieSizeX = 190
     const pieSizeY = 130
@@ -60,7 +61,7 @@ const PieChart = ({ pieChartData }) => {
         plugins: {
             title: {
                 display: true,
-                text: 'Chart.js Bar Chart - Stacked',
+                // text: 'Chart.js Bar Chart - Stacked',
             },
         },
         responsive: true,
@@ -74,37 +75,25 @@ const PieChart = ({ pieChartData }) => {
         },
     };
 
-    const labels = ['2021', '2022'];
-
     const data = {
-        labels,
-        datasets: [
-            {
-                label: 'Dataset 1',
-                data: labels.map(() => Math.random() * 1000),
-                backgroundColor: 'rgb(255, 99, 132)',
-            },
-            {
-                label: 'Dataset 2',
-                data: labels.map(() => Math.random() * 1000),
-                backgroundColor: 'rgb(75, 192, 192)',
-            },
-            {
-                label: 'Dataset 3',
-                data: labels.map(() => Math.random() * 1000),
-                backgroundColor: 'rgb(53, 162, 235)',
-            },
-        ],
+        labels: barChartData.labels,
+        datasets: barChartData.dataset.map(set => {
+            const category = Object.keys(set)[0]
+            return {
+                label: category,
+                data: set[category].values,
+                backgroundColor: set[category].color,
+            }
+        })
     };
 
-
+    console.log(barChartData);
 
     return (
         <MainContainer>
             <div className="w-full max-w-2xl">
-                <Bar options={options} data={data} />
-
-                {/* <Pie
+                {/* <Bar options={options} data={data} /> */}
+                <Pie
                     data={pieData}
                     lineWidth={30}
                     startAngle={330}
@@ -121,7 +110,7 @@ const PieChart = ({ pieChartData }) => {
                     }}
                     viewBoxSize={[pieSizeX, pieSizeY]}
                     center={[centerX, centerY]}
-                /> */}
+                />
             </div>
             <div className="flex flex-col items-center w-11/12 text-xs">
                 <DatePicker

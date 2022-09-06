@@ -29,6 +29,20 @@ export function getLastNTransactions(n) {
     return shortTrs
 }
 
+const palette = [
+    '#184E77',
+    '#1E6091',
+    '#1A759F',
+    '#168AAD',
+    '#34A0A4',
+    '#52B69A',
+    '#76C893',
+    '#99D98C',
+    '#B5E48C',
+    '#D9ED92',
+    '#EDFF7A',
+]
+
 export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year = new Date().getFullYear().toString()) {
 
     const file = getFile()
@@ -60,19 +74,6 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
             return acc;
         }, {});
 
-    const palette = [
-        '#184E77',
-        '#1E6091',
-        '#1A759F',
-        '#168AAD',
-        '#34A0A4',
-        '#52B69A',
-        '#76C893',
-        '#99D98C',
-        '#B5E48C',
-        '#D9ED92',
-        '#EDFF7A',
-    ]
     const totalsByCategory = Object.entries(transactions)
         .map(([title, arr]) => {
             return {
@@ -89,4 +90,39 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
         })
 
     return totalsByCategory
+}
+
+export function getBarChartData(monthNum = 7, yearNum = 2022) {
+    let previMonth = monthNum - 1
+    let previYear = yearNum
+    if (previMonth === 0) {
+        previYear--
+        previMonth = 12
+    }
+    const curMonth = yearNum + "-" + monthNum.toString().padStart(2, '0')
+    const prevMonth = previYear + "-" + previMonth.toString().padStart(2, '0')
+
+    const dataByPeriod = {
+        prevMonth: getMonthlyExpenses(prevMonth.slice(-2), previYear.toString()),
+        curMonth: getMonthlyExpenses(curMonth.slice(-2), yearNum.toString()),
+    }
+    const allCats = [...dataByPeriod.curMonth, ...dataByPeriod.prevMonth].map(row => row.title)
+    const uniqCats = [...new Set(allCats)]
+
+    const barChartDataset = uniqCats.map((category, i) => {
+        const obj = {
+            [category]: {
+                values: [
+                    dataByPeriod.prevMonth.filter(dataObj => dataObj.title === category)[0].value || 0,
+                    dataByPeriod.curMonth.filter(dataObj => dataObj.title === category)[0].value || 0,
+                ],
+                color: palette[i],
+            }
+        }
+        return obj
+    })
+    return {
+        labels: [prevMonth, curMonth],
+        dataset: barChartDataset,
+    }
 }
