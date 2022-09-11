@@ -111,10 +111,10 @@ const PieChart = ({ pieChartData, barChartData }) => {
                 />
             </div>
             <div className="flex flex-col items-center w-11/12 text-xs">
+                <PieTable pieData={pieData} />
                 <DatePicker
                     setPieData={setPieData}
                 />
-                <PieTable pieData={pieData} />
             </div>
         </MainContainer>
     );

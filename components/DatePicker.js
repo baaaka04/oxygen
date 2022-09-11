@@ -93,12 +93,12 @@ export function DatePicker({ setPieData }) {
         <div className="flex flex-col items-center w-full">
             <div className="flex items-center justify-center mb-3 text-blue-900 rounded-full top-1 dark:text-indigo-200 dark:bg-blue-500/30 bg-blue-400/50 icon">
                 <ArrowSVG data-num="-1" className="w-16 h-4 cursor-pointer" fill="rgb(59 130 246 / 0.7)" onClick={swipeMonth} />
-                <button className="px-5 py-2 border-blue-500/70 dark:border-blue-600 border-x" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>
+                <button className="px-5 py-2 relative after:bg-blue-500/70 before:bg-blue-500/70 after:content-[''] after:h-3/4 after:block after:absolute after:top-1 after:left-full after:w-[1px] dark:after:bg-blue-600/30 before:content-[''] before:h-3/4 before:block before:absolute before:top-1 before:right-full before:w-[1px] dark:before:bg-blue-600/30" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>
                 <ArrowSVG data-num="1" className="w-16 h-4 rotate-180 cursor-pointer" fill="rgb(59 130 246 / 0.7)" onClick={swipeMonth} />
 
             </div>
             {isSelectVisible ?
-                <div className="absolute top-0 flex flex-col justify-center w-full h-full" onClick={() => setVisible(!isSelectVisible)}>
+                <div className="absolute flex flex-col justify-end w-full h-full bottom-20" onClick={() => setVisible(!isSelectVisible)}>
                     <div className="w-full p-4 bg-white border-y-2 border-sky-300 dark:bg-slate-800 ">
                         <div className="flex w-full gap-2 mb-2 flex-between">
                             <div className={getBtnStyle('2021')} data-year="2021" onClick={onClickYear}>2021</div>
