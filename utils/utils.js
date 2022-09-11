@@ -93,8 +93,8 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
 }
 
 export function getBarChartData(monthNum = 7, yearNum = 2022) {
-    let previMonth = monthNum - 1
-    let previYear = yearNum
+    let previMonth = Number(monthNum) - 1
+    let previYear = Number(yearNum)
     if (previMonth === 0) {
         previYear--
         previMonth = 12

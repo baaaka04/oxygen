@@ -87,8 +87,6 @@ const PieChart = ({ pieChartData, barChartData }) => {
         })
     };
 
-    console.log(barChartData);
-
     return (
         <MainContainer>
             <div className="w-full max-w-2xl">
