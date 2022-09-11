@@ -26,11 +26,8 @@ html, body {
     text-align: -webkit-center;
 }
 
-.dark .icon > svg > path {
-    fill: rgb(199 210 254);
-}
 .icon > svg > path {
-    fill: rgb(30 58 138);
+    fill: rgb(100 116 139);
 }
 
 .dark .active > div {
@@ -42,7 +39,14 @@ html, body {
 
 .dark .active {
     color: rgb(199 210 254);  
+   
 }
+.dark .active svg path {
+    fill: rgb(248 250 252);
+    }
 .active {
     color: rgb(30 58 138);  
 }
+.active svg path {
+    fill: rgb(30 58 138);
+    }
