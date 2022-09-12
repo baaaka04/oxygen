@@ -35,7 +35,7 @@ export default function MainContainer({ children }) {
 
     return (
         <>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center h-full">
                 {children}
             </div>
             <div className="fixed bottom-0 flex items-center justify-around w-full h-16 dark:bg-slate-700 bg-slate-300">

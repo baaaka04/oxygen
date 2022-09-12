@@ -110,7 +110,7 @@ const PieChart = ({ pieChartData, barChartData }) => {
                     center={[centerX, centerY]}
                 />
             </div>
-            <div className="flex flex-col items-center w-11/12 text-xs">
+            <div className="flex flex-col justify-between w-11/12 text-xs grow">
                 <PieTable pieData={pieData} />
                 <DatePicker
                     setPieData={setPieData}
