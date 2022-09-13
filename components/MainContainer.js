@@ -1,5 +1,5 @@
 import A from "./A";
-import PieChartSVG from '../public/icons/pie-chart.svg';
+import ChartSVG from '../public/icons/pie-chart.svg';
 import SettingSVG from '../public/icons/settings.svg';
 import HomeSVG from '../public/icons/sheet.svg';
 import { useEffect } from "react";
@@ -13,9 +13,9 @@ export default function MainContainer({ children }) {
             icon: <HomeSVG />
         },
         {
-            href: '/piechart',
+            href: '/charts',
             text: 'Анализ',
-            icon: <PieChartSVG />
+            icon: <ChartSVG />
         },
         {
             href: '/settings',

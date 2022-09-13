@@ -29,18 +29,18 @@ export function getLastNTransactions(n) {
     return shortTrs
 }
 
-const palette = [
-    '#184E77',
-    '#1E6091',
-    '#1A759F',
-    '#168AAD',
-    '#34A0A4',
-    '#52B69A',
-    '#76C893',
-    '#99D98C',
-    '#B5E48C',
-    '#D9ED92',
-    '#EDFF7A',
+const piePalette = [
+    '#184E77', '#1E6091', '#1A759F',
+    '#168AAD', '#34A0A4', '#52B69A',
+    '#76C893', '#99D98C', '#B5E48C',
+    '#D9ED92', '#EDFF7A',
+]
+
+const barPalette = [
+    "#303F9F", "#5C6BC0", "#EC407A",
+    "#FF7043", "#FFCA28", "#FFEE58",
+    "#D4E157", "#66BB6A", "#26A69A",
+    '#26C6DA', '#81D4FA',
 ]
 
 export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year = new Date().getFullYear().toString()) {
@@ -85,25 +85,25 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
         .map((cat, i) => {
             return {
                 ...cat,
-                color: palette[i],
+                color: piePalette[i],
             }
         })
 
     return totalsByCategory
 }
 
-export function getBarChartData(monthNum = (new Date().getMonth() +1), yearNum = new Date().getFullYear()) {
-    let previMonth = Number(monthNum) - 1
-    let previYear = Number(yearNum)
-    if (previMonth === 0) {
-        previYear--
-        previMonth = 12
+export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear()) {
+    let prevValueMonth = Number(monthNum) - 1
+    let prevValueYear = Number(yearNum)
+    if (prevValueMonth === 0) {
+        prevValueYear--
+        prevValueMonth = 12
     }
     const curMonth = yearNum + "-" + monthNum.toString().padStart(2, '0')
-    const prevMonth = previYear + "-" + previMonth.toString().padStart(2, '0')
+    const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
 
     const dataByPeriod = {
-        prevMonth: getMonthlyExpenses(prevMonth.slice(-2), previYear.toString()),
+        prevMonth: getMonthlyExpenses(prevMonth.slice(-2), prevValueYear.toString()),
         curMonth: getMonthlyExpenses(curMonth.slice(-2), yearNum.toString()),
     }
     const allCats = [...dataByPeriod.curMonth, ...dataByPeriod.prevMonth].map(row => row.title)
@@ -113,10 +113,10 @@ export function getBarChartData(monthNum = (new Date().getMonth() +1), yearNum =
         const obj = {
             [category]: {
                 values: [
-                    dataByPeriod.prevMonth.filter(dataObj => dataObj.title === category)[0].value || 0,
-                    dataByPeriod.curMonth.filter(dataObj => dataObj.title === category)[0].value || 0,
+                    dataByPeriod.prevMonth.filter(dataObj => dataObj.title === category)[0]?.value || 0,
+                    dataByPeriod.curMonth.filter(dataObj => dataObj.title === category)[0]?.value || 0,
                 ],
-                color: palette[i],
+                color: barPalette[i],
             }
         }
         return obj

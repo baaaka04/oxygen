@@ -2,7 +2,7 @@ import { useState } from "react"
 import ArrowSVG from '../public/icons/arrow.svg'
 
 async function fetchPieData(month, year) {
-    return fetch('/api/pieData', {
+    return fetch('/api/chartsData', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-po
 const activeBtnClass = " dark:bg-blue-500/30 bg-blue-400/50"
 const currnetBtnClass = " dark:bg-slate-700/70 bg-blue-200/30"
 
-export function DatePicker({ setPieData }) {
+export function DatePicker({ setChartsData }) {
 
     const [month, setMonth] = useState(curMonthNumber)
     const [year, setYear] = useState(curYearNumber)
@@ -58,7 +58,7 @@ export function DatePicker({ setPieData }) {
         const eventMonth = e.target.dataset.month
         setMonth(eventMonth)
         fetchPieData(eventMonth, year)
-            .then(data => setPieData(data))
+            .then(data => setChartsData(data))
     }
 
     function onClickYear(e) {
@@ -66,7 +66,7 @@ export function DatePicker({ setPieData }) {
         const eventYear = e.target.dataset.year
         setYear(eventYear)
         fetchPieData(month, eventYear)
-            .then(data => setPieData(data))
+            .then(data => setChartsData(data))
     }
 
     function swipeMonth(e) {
@@ -86,11 +86,11 @@ export function DatePicker({ setPieData }) {
         setMonth(newMonth)
         setYear(String(selectedYear))
         fetchPieData(newMonth, String(selectedYear))
-            .then(data => setPieData(data))
+            .then(data => setChartsData(data))
     }
 
     return (
-        <div className="flex flex-col items-center w-full">
+        <div className="flex flex-col items-center w-full mt-auto">
             <div className="flex items-center justify-center mb-20 text-blue-900 rounded-full top-1 dark:text-indigo-200 dark:bg-blue-500/30 bg-blue-400/50 icon">
                 <ArrowSVG data-num="-1" className="w-16 h-4 cursor-pointer" fill="rgb(59 130 246 / 0.7)" onClick={swipeMonth} />
                 <button className="px-5 py-2 relative after:bg-blue-500/70 before:bg-blue-500/70 after:content-[''] after:h-3/4 after:block after:absolute after:top-1 after:left-full after:w-[1px] dark:after:bg-blue-600/30 before:content-[''] before:h-3/4 before:block before:absolute before:top-1 before:right-full before:w-[1px] dark:before:bg-blue-600/30" onClick={() => setVisible(!isSelectVisible)}>{months[+month - 1].title}, {year}</button>

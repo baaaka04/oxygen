@@ -68,7 +68,7 @@ const Settings = ({ hotkeysNum }) => {
                     <button className="w-24 ml-auto bg-blue-100 rounded dark:bg-slate-500" onClick={() => setHotkeys(8)}>сброс</button>
                     <select className="w-24 ml-2 text-center bg-blue-100 rounded dark:bg-slate-500" value={hotkeyNum} onChange={(e) => setHotkeys(e.target.value)}>
                         {[...Array(7).keys()].map(i => {
-                            return <option>{i + 6}</option>
+                            return <option key={`opt${i+6}`}>{i + 6}</option>
                         })}
                     </select>
                 </div>
