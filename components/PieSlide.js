@@ -14,7 +14,7 @@ export function PieSlide() {
 
     return (
         <div className="flex-[1_0_100%] h-full flex flex-col items-center">
-            <div className="w-full max-w-lg mx-auto">
+            <div className="w-11/12 max-w-lg mx-auto">
                 <Pie
                     data={chartsData.pieChartData}
                     lineWidth={30}
