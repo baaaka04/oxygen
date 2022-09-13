@@ -33,6 +33,7 @@ const spacer = (num) => {
 }
 
 export const addSpaceToNumber = (x) => {
+    if (!/^-?\d+$/.test(x)) return 0
     x = x.toString()
     let result
     if (x.includes('.')) {
