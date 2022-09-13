@@ -37,7 +37,7 @@ const piePalette = [
 ]
 
 const barPalette = [
-    "#303F9F", "#5C6BC0", "#EC407A",
+    "#184e77", "#5C6BC0", "#EC407A",
     "#FF7043", "#FFCA28", "#FFEE58",
     "#D4E157", "#66BB6A", "#26A69A",
     '#26C6DA', '#81D4FA',
