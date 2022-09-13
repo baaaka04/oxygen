@@ -13,8 +13,8 @@ export function PieSlide() {
     const centerY = pieSizeY / 2
 
     return (
-        <div className="flex-[1_0_100%] w-full h-full">
-            <div className="w-full max-w-2xl">
+        <div className="flex-[1_0_100%] h-full flex flex-col items-center">
+            <div className="w-full max-w-lg mx-auto">
                 <Pie
                     data={chartsData.pieChartData}
                     lineWidth={30}

@@ -30,11 +30,17 @@ export function BarSlide() {
     );
     const options = {
         responsive: true,
+        plugins: {
+            legend: {
+                display: false,
+            }
+        },
         scales: {
             x: {
                 stacked: true,
             },
             y: {
+                display: false,
                 stacked: true,
             },
         },
@@ -51,12 +57,11 @@ export function BarSlide() {
             }
         })
     };
-//!!!!!!!!!! width needs fixing
-// learn flex css property
+
     return (
-        <div className="flex-[1_0_100%] w-[130px] h-full"> 
-            <div className="w-full max-w-2xl">
-                <Bar options={options} data={data} height={230} />
+        <div className="flex-[1_0_100%] h-full flex flex-col items-center">
+            <div className="relative w-screen max-w-lg mt-3">
+                <Bar options={options} data={data} />
             </div>
             <BarTable />
         </div>

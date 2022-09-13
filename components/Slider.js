@@ -50,7 +50,7 @@ export function Slider({ chartsData, setChartsData }) {
 
     return (
         <div
-            className="relative flex flex-col items-center w-full overflow-hidden"
+            className="relative flex flex-col items-center w-full overflow-hidden grow"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
         >
@@ -65,9 +65,9 @@ export function Slider({ chartsData, setChartsData }) {
 
                 }}
             >
-                <Arrows />
-                {/* <Dots /> */}
                 <SliderList />
+                <Arrows />
+                <Dots />
             </SliderContext.Provider>
         </div>
 

@@ -8,7 +8,7 @@ export function PieTable() {
     const totalMonthlyExpenses = pieChartData.reduce((acc, cur) => acc + cur.value, 0)
 
     return (
-        <table className="w-11/12 mb-4 text-xs text-blue-900 border-hidden dark:text-indigo-200">
+        <table className="w-11/12 max-w-2xl my-2 text-xs text-blue-900 border-hidden dark:text-indigo-200">
             <thead className="bg-blue-100 dark:bg-slate-700">
                 <tr>
                     <th className="p-1 border rounded-tl-xl border-blue-500/30 dark:border-blue-600/20">Категория</th>

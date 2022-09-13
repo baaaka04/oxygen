@@ -7,8 +7,8 @@ export function SliderList() {
     const { slideNumber } = useContext(SliderContext);
 
     return (
-        <div 
-            className="flex transition-transform duration-500 ease-in-out"
+        <div
+            className="flex w-full transition-transform duration-500 ease-in-out"
             style={{ transform: `translateX(-${slideNumber * 100}%)` }}
         >
             <PieSlide />
