@@ -46,8 +46,8 @@ export function BarTable() {
                                         {category}
                                     </div>
                                 </td>
-                                <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(prevMonth)}</td>
-                                <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(curMonth)}</td>
+                                <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{addSpaceToNumber(prevMonth)}</td>
+                                <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{addSpaceToNumber(curMonth)}</td>
                                 <td className="px-3 py-1 text-center border border-blue-500/30 dark:border-blue-600/20">
                                     <div className="flex justify-center gap-2">
                                         <TriangleSVG fill={change > 0 ? '#f25f5c' : '#a7c957'} transform={change > 0 ? "" : "rotate(180 0 0)"} />
@@ -59,8 +59,8 @@ export function BarTable() {
                     })}
                     <tr className="text-center bg-blue-100 dark:bg-slate-700">
                         <td className="px-3 py-1 text-left border border-blue-500/30 dark:border-blue-600/20">ИТОГО</td>
-                        <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(prevMonthTotal)}</td>
-                        <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(curMonthTotal)}</td>
+                        <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{addSpaceToNumber(prevMonthTotal)}</td>
+                        <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{addSpaceToNumber(curMonthTotal)}</td>
                         <td className="py-1 border border-blue-500/30 dark:border-blue-600/20">
                             <div className="flex justify-center gap-2">
                                 <TriangleSVG fill={totalChange > 0 ? '#f25f5c' : '#a7c957'} transform={totalChange > 0 ? "" : "rotate(180 0 0)"} />
