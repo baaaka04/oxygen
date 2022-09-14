@@ -24,8 +24,8 @@ export function BarTable() {
                 <thead className="bg-blue-100 dark:bg-slate-700">
                     <tr>
                         <th className="p-1 border rounded-tl-xl border-blue-500/30 dark:border-blue-600/20">Категория</th>
-                        <th className="p-1 border border-blue-500/30 dark:border-blue-600/20">{barChartData.labels[0]}</th>
-                        <th className="p-1 border border-blue-500/30 dark:border-blue-600/20">{barChartData.labels[1]}</th>
+                        <th className="p-1 border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{barChartData.labels[0]}</th>
+                        <th className="p-1 border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{barChartData.labels[1]}</th>
                         <th className="p-1 border rounded-tr-xl border-blue-500/30 dark:border-blue-600/20">разн.</th>
                     </tr>
                 </thead>
