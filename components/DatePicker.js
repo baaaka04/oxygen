@@ -15,7 +15,7 @@ async function fetchPieData(month, year) {
         .then(res => res.json())
 }
 
-const months = [
+export const months = [
     { title: 'январь', value: '01' },
     { title: 'февраль', value: '02' },
     { title: 'март', value: '03' },

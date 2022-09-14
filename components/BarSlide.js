@@ -10,6 +10,7 @@ import {
 import { useContext } from 'react';
 import { Bar } from 'react-chartjs-2';
 import { BarTable } from './BarTable';
+import { months } from './DatePicker';
 import { SliderContext } from './Slider';
 
 
@@ -37,6 +38,12 @@ export function BarSlide() {
         },
         scales: {
             x: {
+                ticks: {
+                    color: "#c7d2fe",
+                    font: {
+                        size: 14,
+                    }
+                    },
                 stacked: true,
             },
             y: {
@@ -47,7 +54,11 @@ export function BarSlide() {
     };
 
     const data = {
-        labels: barChartData.labels,
+        labels: barChartData.labels.map(label => {
+            const m = months[+label.slice(-2)-1].title
+            const y = label.slice(2,4)
+            return m+"'"+y
+        }),
         datasets: barChartData.dataset.map(set => {
             const category = Object.keys(set)[0]
             return {

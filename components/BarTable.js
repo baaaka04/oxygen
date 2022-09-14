@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { addSpaceToNumber } from "../utils/finNumbers"
 import { SliderContext } from "./Slider"
+import TriangleSVG from '../public/icons/triangle.svg'
 
 export function BarTable() {
     const { chartsData } = useContext(SliderContext)
@@ -39,10 +40,20 @@ export function BarTable() {
 
                         return (
                             <tr key={category}>
-                                <td className="flex px-3 py-1 text-left border border-blue-500/30 dark:border-blue-600/20"><div style={{ backgroundColor: color }} className="w-3 h-3 my-auto mr-2 rounded-full"></div>{category}</td>
+                                <td className="px-3 py-1 text-left border border-blue-500/30 dark:border-blue-600/20">
+                                    <div className="flex">
+                                        <div style={{ backgroundColor: color }} className="w-3 h-3 my-auto mr-2 rounded-full"></div>
+                                        {category}
+                                    </div>
+                                </td>
                                 <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(prevMonth)}</td>
                                 <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(curMonth)}</td>
-                                <td className="px-3 py-1 text-center border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(change) ? addSpaceToNumber(change) + '%' : "n/a"}</td>
+                                <td className="px-3 py-1 text-center border border-blue-500/30 dark:border-blue-600/20">
+                                    <div className="flex justify-center gap-2">
+                                        <TriangleSVG fill={change > 0 ? '#f25f5c' : '#a7c957'} transform={change > 0 ? "" : "rotate(180 0 0)"} />
+                                        {addSpaceToNumber(change) ? addSpaceToNumber(change) + '%' : "n/a"}
+                                    </div>
+                                </td>
                             </tr>
                         )
                     })}
@@ -50,7 +61,12 @@ export function BarTable() {
                         <td className="px-3 py-1 text-left border border-blue-500/30 dark:border-blue-600/20">ИТОГО</td>
                         <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(prevMonthTotal)}</td>
                         <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20">{addSpaceToNumber(curMonthTotal)}</td>
-                        <td className="py-1 border border-blue-500/30 dark:border-blue-600/20">{totalChange ? addSpaceToNumber(totalChange) + '%' : '-'} </td>
+                        <td className="py-1 border border-blue-500/30 dark:border-blue-600/20">
+                            <div className="flex justify-center gap-2">
+                                <TriangleSVG fill={totalChange > 0 ? '#f25f5c' : '#a7c957'} transform={totalChange > 0 ? "" : "rotate(180 0 0)"} />
+                                {totalChange ? addSpaceToNumber(totalChange) + '%' : '-'}
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
