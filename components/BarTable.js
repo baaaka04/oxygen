@@ -2,6 +2,7 @@ import { useContext } from "react"
 import { addSpaceToNumber } from "../utils/finNumbers"
 import { SliderContext } from "./Slider"
 import TriangleSVG from '../public/icons/triangle.svg'
+import { addDotsBigNum } from "../utils/dotsToBigNums"
 
 export function BarTable() {
     const { chartsData } = useContext(SliderContext)
@@ -51,7 +52,7 @@ export function BarTable() {
                                 <td className="px-3 py-1 text-center border border-blue-500/30 dark:border-blue-600/20">
                                     <div className="flex justify-center gap-2">
                                         <TriangleSVG fill={change > 0 ? '#f25f5c' : '#a7c957'} transform={change > 0 ? "" : "rotate(180 0 0)"} />
-                                        {addSpaceToNumber(change) ? addSpaceToNumber(change) + '%' : "n/a"}
+                                        {addSpaceToNumber(change) ? addDotsBigNum( addSpaceToNumber(change) ) + '%' : "n/a"}
                                     </div>
                                 </td>
                             </tr>
