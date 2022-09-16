@@ -65,7 +65,7 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
                 sum: row[4]
             }
         })
-        .filter(trs => trs.opex === 'опер' && trs.month === month && trs.year === year)
+        .filter(trs => trs.opex === 'опер' && trs.month === month && trs.year === year && !(trs.category === 'прочее' && trs.subCategory === 'мать'))
         .reduce((acc, cur) => {
             if (!acc[cur['category']]) {
                 acc[cur['category']] = [];
@@ -73,7 +73,7 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
             acc[cur['category']].push(cur);
             return acc;
         }, {});
-
+console.log(transactions);
     const totalsByCategory = Object.entries(transactions)
         .map(([title, arr]) => {
             return {

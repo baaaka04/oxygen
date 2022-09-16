@@ -66,7 +66,9 @@ export function BarTable() {
                         <td className="px-3 py-1 text-right border border-blue-500/30 dark:border-blue-600/20 whitespace-nowrap">{addSpaceToNumber(curMonthTotal)}</td>
                         <td className="py-1 border border-blue-500/30 dark:border-blue-600/20">
                             <div className="flex justify-center gap-2">
-                                <TriangleSVG fill={totalChange > 0 ? '#f25f5c' : '#a7c957'} transform={totalChange > 0 ? "" : "rotate(180 0 0)"} />
+                                <div className={totalChange > 0 ? "" : "rotate-180"}>
+                                    <TriangleSVG fill={totalChange > 0 ? '#f25f5c' : '#a7c957'} />
+                                </div>
                                 {totalChange ? addSpaceToNumber(totalChange) + '%' : '-'}
                             </div>
                         </td>
