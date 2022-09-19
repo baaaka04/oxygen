@@ -4,9 +4,9 @@ import { SliderContext } from "./Slider"
 import TriangleSVG from '../public/icons/triangle.svg'
 import { addDotsBigNum } from "../utils/dotsToBigNums"
 
-export function BarTable() {
+export function BarTable({yearMode}) {
     const { chartsData } = useContext(SliderContext)
-    const { barChartData } = chartsData
+    const barChartData = yearMode ? chartsData.barOverYearChartData : chartsData.barOverMonthChartData
     const { dataset } = barChartData
 
     let prevMonthNumbers = []

@@ -13,6 +13,7 @@ export function SliderList() {
         >
             <PieSlide />
             <BarSlide />
+            <BarSlide yearMode/>
         </div>
     )
 }

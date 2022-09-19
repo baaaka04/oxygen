@@ -13,15 +13,15 @@ export function Slider({ chartsData, setChartsData }) {
         let slideNumber = 0;
 
         if (slide + direction < 0) {
-            slideNumber = 2 - 1; // to first slide
+            slideNumber = 1; // to first slide
         } else {
-            slideNumber = (slide + direction) % 2; //two slides
+            slideNumber = (slide + direction) % 3; //three slides
         }
 
         setSlide(slideNumber);
     };
     const goToSlide = (number) => {
-        setSlide(number % 2); // two slides
+        setSlide(number % 3); // three slides
     };
 
     const handleTouchStart = (e) => {

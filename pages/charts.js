@@ -20,10 +20,12 @@ export async function getServerSideProps({ req, res }) {
     // ----------- authorization
 
     const pieChartData = getMonthlyExpenses()
-    const barChartData = getBarChartData()
+    const barOverMonthChartData = getBarChartData()
+    const barOverYearChartData = getBarChartData(...Array(2), true) //pass only last arg
     const chartsDataProp = {
         pieChartData,
-        barChartData,
+        barOverMonthChartData,
+        barOverYearChartData,
     }
 
     return {

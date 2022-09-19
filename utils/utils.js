@@ -73,8 +73,8 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
             acc[cur['category']].push(cur);
             return acc;
         }, {});
-console.log(transactions);
-    const totalsByCategory = Object.entries(transactions)
+
+        const totalsByCategory = Object.entries(transactions)
         .map(([title, arr]) => {
             return {
                 title,
@@ -92,29 +92,32 @@ console.log(transactions);
     return totalsByCategory
 }
 
-export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear()) {
+export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false ) {
     let prevValueMonth = Number(monthNum) - 1
     let prevValueYear = Number(yearNum)
     if (prevValueMonth === 0) {
         prevValueYear--
         prevValueMonth = 12
     }
-    const curMonth = yearNum + "-" + monthNum.toString().padStart(2, '0')
+    const curPeriod = yearNum + "-" + monthNum.toString().padStart(2, '0')
     const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
+    const prevYear = (Number(yearNum) -1) + "-" + monthNum.toString().padStart(2, '0')
+
+    const prevPeriod = yearMode ? prevYear : prevMonth
 
     const dataByPeriod = {
-        prevMonth: getMonthlyExpenses(prevMonth.slice(-2), prevValueYear.toString()),
-        curMonth: getMonthlyExpenses(curMonth.slice(-2), yearNum.toString()),
+        prevPeriod: getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0,4)),
+        curPeriod: getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0,4)),
     }
-    const allCats = [...dataByPeriod.curMonth, ...dataByPeriod.prevMonth].map(row => row.title)
+    const allCats = [...dataByPeriod.curPeriod, ...dataByPeriod.prevPeriod].map(row => row.title)
     const uniqCats = [...new Set(allCats)]
 
     const barChartDataset = uniqCats.map((category, i) => {
         const obj = {
             [category]: {
                 values: [
-                    dataByPeriod.prevMonth.filter(dataObj => dataObj.title === category)[0]?.value || 0,
-                    dataByPeriod.curMonth.filter(dataObj => dataObj.title === category)[0]?.value || 0,
+                    dataByPeriod.prevPeriod.filter(dataObj => dataObj.title === category)[0]?.value || 0,
+                    dataByPeriod.curPeriod.filter(dataObj => dataObj.title === category)[0]?.value || 0,
                 ],
                 color: barPalette[i],
             }
@@ -122,7 +125,7 @@ export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum 
         return obj
     })
     return {
-        labels: [prevMonth, curMonth],
+        labels: [prevPeriod, curPeriod],
         dataset: barChartDataset,
     }
 }

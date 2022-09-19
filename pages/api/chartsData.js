@@ -1,12 +1,13 @@
 import { getBarChartData, getMonthlyExpenses } from '../../utils/utils';
 
 export default function pieData(req, res) {
-    const month = req.body.month
-    const year = req.body.year
+    const {month, year} = req.body
     const pieChartData = getMonthlyExpenses(month, year)
-    const barChartData = getBarChartData(month, year)
+    const barOverMonthChartData = getBarChartData(month, year)
+    const barOverYearChartData = getBarChartData(month, year, true)
     res.status(201).json({
         pieChartData,
-        barChartData,
+        barOverMonthChartData,
+        barOverYearChartData,
     })
 }

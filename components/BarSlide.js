@@ -16,10 +16,10 @@ import { SliderContext } from './Slider';
 
 
 
-export function BarSlide() {
+export function BarSlide({yearMode}) {
 
     const { chartsData } = useContext(SliderContext)
-    const barChartData = chartsData.barChartData
+    const barChartData = yearMode ? chartsData.barOverYearChartData : chartsData.barOverMonthChartData
 
     ChartJS.register(
         CategoryScale,
@@ -74,7 +74,7 @@ export function BarSlide() {
             <div className="relative w-screen max-w-lg mt-3">
                 <Bar options={options} data={data} />
             </div>
-            <BarTable />
+            <BarTable yearMode={yearMode}/>
         </div>
     )
 }
