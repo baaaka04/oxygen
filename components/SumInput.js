@@ -75,6 +75,7 @@ const SumInput = ({ inputValue, setInputValue }) => {
                     onChange={e => setInputValue(e.target.value)}
                     ref={ref}
                     onFocus={e => e.target.select()}
+                    required
                 />
                 <CalcSVG className="p-1 cursor-pointer h-9 w-9" onClick={() => setVisible(!visible)} />
             </div>

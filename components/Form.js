@@ -98,6 +98,7 @@ export default function Form({ table, setTable, frequentTrs }) {
                         type="text"
                         value={subCategoryValue}
                         onChange={e => setSubCategoryValue(e.target.value)}
+                        required
                     />
                 </div>
 
