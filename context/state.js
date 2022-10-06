@@ -1,16 +1,11 @@
 import { createContext, useContext } from 'react';
 
-const AppContext = createContext();
+export const AppContext = createContext();
 
 export function AppWrapper({ children }) {
-    let sharedState = {/* whatever you want */
-        hotkeysVol: 8,
-        value: 42,
-    }
-
 
     return (
-        <AppContext.Provider value={sharedState}>
+        <AppContext.Provider value={{}}>
             {children}
         </AppContext.Provider>
     );

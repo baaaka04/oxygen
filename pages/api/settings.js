@@ -1,10 +1,13 @@
 import fs from 'fs'
+import { getSettings, setSettings } from '../../utils/utils'
 
 export default function settings(req, res) {
-    const num = +req.body.hotkey
-    const currentSettingsFile = fs.readFileSync('./utils/settings.json', 'utf-8')
+    const num = +req.body?.hotkey
+    const categoriesList = req.body?.categories
+    const currentSettingsFile = getSettings()
     let newSettings = JSON.parse(currentSettingsFile)
-    newSettings.user.hotkeys = num
-    fs.writeFileSync('./utils/settings.json', JSON.stringify(newSettings))
-    res.status(201).json({})
+    num ? newSettings.user.hotkeys = num : null
+    categoriesList ? newSettings.user.categories = categoriesList : null
+    setSettings(newSettings)
+    res.status(201).json({ newSettings })
 }

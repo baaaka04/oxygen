@@ -3,6 +3,7 @@ import Form from '../components/Form';
 import MainContainer from '../components/MainContainer';
 import Table from "../components/Table";
 import isAuthorized from '../utils/auth';
+import { getCategoriesList } from '../utils/getCategoriesList';
 import { getHotkeysNumber } from '../utils/getHoykeys';
 import { getLastNTransactions } from '../utils/utils';
 
@@ -51,12 +52,15 @@ export async function getServerSideProps({ req, res }) {
     frequentTrs = Object.keys(sortedtrs)
         .slice(0, getHotkeysNumber())
         .map((i) => i.split(","));
+
+    const categories = getCategoriesList()
+
     return {
-        props: { frequentTrs, lastFiveTrs }, // will be passed to the page component as props
+        props: { frequentTrs, lastFiveTrs, categories }, // will be passed to the page component as props
     }
 }
 
-const Index = ({ frequentTrs, lastFiveTrs }) => {
+const Index = ({ frequentTrs, lastFiveTrs, categories }) => {
     const [table, setTable] = useState(lastFiveTrs);
 
     return (
@@ -66,6 +70,7 @@ const Index = ({ frequentTrs, lastFiveTrs }) => {
                 frequentTrs={frequentTrs}
                 table={table}
                 setTable={setTable}
+                categories={categories}
             />
         </MainContainer>
     );

@@ -74,7 +74,7 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
             return acc;
         }, {});
 
-        const totalsByCategory = Object.entries(transactions)
+    const totalsByCategory = Object.entries(transactions)
         .map(([title, arr]) => {
             return {
                 title,
@@ -92,7 +92,7 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
     return totalsByCategory
 }
 
-export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false ) {
+export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false) {
     let prevValueMonth = Number(monthNum) - 1
     let prevValueYear = Number(yearNum)
     if (prevValueMonth === 0) {
@@ -101,13 +101,13 @@ export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum 
     }
     const curPeriod = yearNum + "-" + monthNum.toString().padStart(2, '0')
     const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
-    const prevYear = (Number(yearNum) -1) + "-" + monthNum.toString().padStart(2, '0')
+    const prevYear = (Number(yearNum) - 1) + "-" + monthNum.toString().padStart(2, '0')
 
     const prevPeriod = yearMode ? prevYear : prevMonth
 
     const dataByPeriod = {
-        prevPeriod: getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0,4)),
-        curPeriod: getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0,4)),
+        prevPeriod: getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)),
+        curPeriod: getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)),
     }
     const allCats = [...dataByPeriod.curPeriod, ...dataByPeriod.prevPeriod].map(row => row.title)
     const uniqCats = [...new Set(allCats)]
@@ -128,4 +128,12 @@ export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum 
         labels: [prevPeriod, curPeriod],
         dataset: barChartDataset,
     }
+}
+
+export function getSettings() {
+    return fs.readFileSync('./utils/settings.json', 'utf-8')
+}
+
+export function setSettings(newSettings) {
+    fs.writeFileSync('./utils/settings.json', JSON.stringify(newSettings))
 }

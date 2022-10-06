@@ -2,9 +2,9 @@ import { useState } from "react";
 import HotKeys from "./HotKeys";
 import SumInput from "./SumInput";
 
-export default function Form({ table, setTable, frequentTrs }) {
+export default function Form({ table, setTable, frequentTrs, categories }) {
 
-    const [categoryValue, setCategoryValue] = useState("питание")
+    const [categoryValue, setCategoryValue] = useState(categories[0] || '')
     const [subCategoryValue, setSubCategoryValue] = useState("")
     const [invest, setInvest] = useState("опер")
     const [date, setDate] = useState(new Date().toJSON().slice(0, 10))
@@ -74,19 +74,11 @@ export default function Form({ table, setTable, frequentTrs }) {
                         value={categoryValue}
                         onChange={e => setCategoryValue(e.target.value)}
                     >
-                        <option>питание</option>
-                        <option>транспорт</option>
-                        <option>здоровье</option>
-                        <option>ЖКХ</option>
-                        <option>одежда</option>
-                        <option>развлечения</option>
-                        <option>подарки</option>
-                        <option>бытовуха</option>
-                        <option>интернет и связь</option>
-                        <option>прочее</option>
-                        <option>животные</option>
-                        <option>здоровье</option>
-                        <option>доход</option>
+                        {categories.map(category => {
+                            return (
+                                <option key={'cat-' + category}>{category}</option>
+                            )
+                        })}
                     </select>
                 </div>
 
