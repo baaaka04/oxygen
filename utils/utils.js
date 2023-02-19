@@ -29,6 +29,29 @@ export function getLastNTransactions(n) {
     return shortTrs
 }
 
+export function parseTransactions(transactions = []) {
+    return transactions
+        .map(line => line.split(','))
+        .map(arrayLine => {
+            const category = arrayLine[0];
+            const subCategory = arrayLine[1];
+            const opex = arrayLine[2];
+            const date = arrayLine[3].slice(5);
+            const sum = arrayLine[4];
+            const fulldate = arrayLine[3];
+
+            const obj = {
+                category,
+                subCategory,
+                opex,
+                date,
+                sum,
+                fulldate,
+            }
+            return obj
+        })
+}
+
 const piePalette = [
     '#184E77', '#1E6091', '#1A759F',
     '#168AAD', '#34A0A4', '#52B69A',

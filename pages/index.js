@@ -5,7 +5,7 @@ import Table from "../components/Table";
 import isAuthorized from '../utils/auth';
 import { getCategoriesList } from '../utils/getCategoriesList';
 import { getHotkeysNumber } from '../utils/getHoykeys';
-import { getLastNTransactions } from '../utils/utils';
+import { getLastNTransactions, parseTransactions } from '../utils/utils';
 
 export async function getServerSideProps({ req, res }) {
     // ----------- authorization
@@ -20,24 +20,8 @@ export async function getServerSideProps({ req, res }) {
     }
     // ----------- authorization
 
-    const lastFiveTrs = getLastNTransactions(5)
-        .map(line => line.split(','))
-        .map(arrayLine => {
-            const category = arrayLine[0];
-            const subCategory = arrayLine[1];
-            const opex = arrayLine[2];
-            const date = arrayLine[3].slice(5);
-            const sum = arrayLine[4];
-
-            const obj = {
-                category,
-                subCategory,
-                opex,
-                date,
-                sum,
-            }
-            return obj
-        })
+    const latestNExpenses = getLastNTransactions(5)
+    const lastFiveTrs = parseTransactions(latestNExpenses)
 
     const counts = {};
     let frequentTrs = [];

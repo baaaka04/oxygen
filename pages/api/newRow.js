@@ -1,4 +1,5 @@
 import fs from 'fs';
+import { getLastNTransactionsToSwift } from '../../utils/mapToSwift';
 
 export default function newRow(req, res) {
     const demo = process.env.Z
@@ -17,5 +18,5 @@ export default function newRow(req, res) {
         ? fs.appendFileSync('./dbase/bruh2.csv', newLine, { encoding: 'utf-8' })
         : fs.appendFileSync('./dbase/bruh.csv', newLine, { encoding: 'utf-8' })
 
-    res.status(200).json()
+    res.status(200).json( getLastNTransactionsToSwift(5) )
 }
