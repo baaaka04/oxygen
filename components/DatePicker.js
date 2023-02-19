@@ -30,6 +30,10 @@ export const months = [
     { title: 'декабрь', value: '12' },
 ]
 
+let years = Array(new Date().getFullYear() - 2020) 
+    .fill(0)
+    .map((_, ind) => ind + 2021) // [2021,2022,2023]
+
 const curMonthNumber = new Date().toJSON().slice(5, 7)
 const curYearNumber = new Date().getFullYear().toString()
 const btnClass = "py-3 text-center border border-indigo-200 rounded-lg cursor-pointer grow"
@@ -105,8 +109,11 @@ export function DatePicker({ setChartsData }) {
                 <div className="absolute flex flex-col justify-end w-full h-full bottom-20" onClick={() => setVisible(!isSelectVisible)}>
                     <div className="w-full p-4 bg-white border-y-2 border-sky-300 dark:bg-slate-800 ">
                         <div className="flex w-full gap-2 mb-2 flex-between">
-                            <div className={getBtnStyle('2021')} data-year="2021" onClick={onClickYear}>2021</div>
-                            <div className={getBtnStyle('2022')} data-year="2022" onClick={onClickYear}>2022</div>
+                            {years.map(year => {
+                                return (
+                                    <div className={getBtnStyle(year.toString())} data-year={year} onClick={onClickYear}>{year}</div>
+                                )
+                            })}
                         </div>
                         <div className="grid w-full grid-cols-3 gap-2">
                             {months.map(item => {
