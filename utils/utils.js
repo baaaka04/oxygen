@@ -115,6 +115,26 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
     return totalsByCategory
 }
 
+export function getDataByPeriodSwiftUI (monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false) {
+    let prevValueMonth = Number(monthNum) - 1
+    let prevValueYear = Number(yearNum)
+    if (prevValueMonth === 0) {
+        prevValueYear--
+        prevValueMonth = 12
+    }
+    const curPeriod = yearNum + "-" + monthNum.toString().padStart(2, '0')
+    const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
+    const prevYear = (Number(yearNum) - 1) + "-" + monthNum.toString().padStart(2, '0')
+
+    const prevPeriod = yearMode ? prevYear : prevMonth
+
+    const dataByPeriod = [ 
+        ...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(item => {return {...item, prevPeriod} }),
+        ...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(item => {return {...item, curPeriod} }),
+    ]
+    return dataByPeriod
+}
+
 export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false) {
     let prevValueMonth = Number(monthNum) - 1
     let prevValueYear = Number(yearNum)
