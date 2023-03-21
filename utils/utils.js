@@ -129,8 +129,8 @@ export function getDataByPeriodSwiftUI (monthNum = (new Date().getMonth() + 1), 
     const prevPeriod = yearMode ? prevYear : prevMonth
 
     const dataByPeriod = [ 
-        ...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(item => {return {...item, prevPeriod} }),
-        ...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(item => {return {...item, curPeriod} }),
+        ...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(item => {return {...item, date: prevPeriod} }),
+        ...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(item => {return {...item, date: curPeriod} }),
     ]
     return dataByPeriod
 }
