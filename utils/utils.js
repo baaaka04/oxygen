@@ -90,7 +90,7 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
         })
         .filter(trs => trs.opex === 'опер' && trs.month === month && trs.year === year && !(trs.category === 'прочее' && trs.subCategory === 'мать'))
         .reduce((acc, cur) => {
-            if (!acc[cur['category']]) {
+            if (!acc[cur.category]) {
                 acc[cur['category']] = [];
             }
             acc[cur['category']].push(cur);
@@ -115,38 +115,92 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
     return totalsByCategory
 }
 
-export function getDataByPeriodSwiftUI (monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false) {
-    let prevValueMonth = Number(monthNum) - 1
-    let prevValueYear = Number(yearNum)
+function getPrevAndCurPeriods (month = (new Date().getMonth() + 1), year = new Date().getFullYear(), isOverYear = false) {
+    let prevValueMonth = Number(month) - 1
+    let prevValueYear = Number(year)
     if (prevValueMonth === 0) {
         prevValueYear--
         prevValueMonth = 12
     }
-    const curPeriod = yearNum + "-" + monthNum.toString().padStart(2, '0')
+    const curPeriod = year + "-" + month.toString().padStart(2, '0')
     const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
-    const prevYear = (Number(yearNum) - 1) + "-" + monthNum.toString().padStart(2, '0')
+    const prevYear = (Number(year) - 1) + "-" + month.toString().padStart(2, '0')
 
-    const prevPeriod = yearMode ? prevYear : prevMonth
+    const prevPeriod = isOverYear ? prevYear : prevMonth
+    return {
+        curPeriod,
+        prevPeriod,
+    }
+}
 
-    const dataByPeriod = [ 
-        ...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(item => {return {...item, date: prevPeriod} }),
-        ...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(item => {return {...item, date: curPeriod} }),
-    ]
-    return dataByPeriod
+export function getDataByPeriodSwiftUI(monthNum, yearNum, yearMode) {
+    let {curPeriod, prevPeriod} = getPrevAndCurPeriods(monthNum, yearNum, yearMode)
+
+    const dataByPeriod = {
+        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(({
+            title,
+            value,
+            color,
+        }) => ({
+            category: title,
+            sum: value,
+            date: prevPeriod
+        }))],
+        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(({
+            title,
+            value,
+            color,
+        }) => ({
+            category: title,
+            sum: value,
+            date: curPeriod
+        }))],
+    }
+    
+    let barChartData = [...dataByPeriod.previousPeriod, ...dataByPeriod.currentPeriod]
+
+    return barChartData
+}
+
+export function getChartDataset (barChartData, monthNum, yearNum, yearMode) {
+    let {curPeriod, prevPeriod} = getPrevAndCurPeriods(monthNum, yearNum, yearMode)
+
+    const dataByPeriod = {
+        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(({
+            title,
+            value,
+            color,
+        }) => ({
+            category: title,
+            sum: value,
+            date: prevPeriod
+        }))],
+        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(({
+            title,
+            value,
+            color,
+        }) => ({
+            category: title,
+            sum: value,
+            date: curPeriod
+        }))],
+    }
+
+    const allCats = [...barChartData].map(row => row.category)
+    const uniqCats = [...new Set(allCats)]
+    const barChartDatalist = uniqCats.map((cat, _) => {
+        return ({
+            category: cat,
+            prevSum: dataByPeriod.previousPeriod.find(item => item.category === cat)?.sum ?? 0,
+            curSum: dataByPeriod.currentPeriod.find(item => item.category === cat)?.sum ?? 0,
+        })
+    }).sort((a,b) => (b.curSum - b.prevSum) - (a.curSum - a.prevSum))
+
+    return barChartDatalist
 }
 
 export function getBarChartData(monthNum = (new Date().getMonth() + 1), yearNum = new Date().getFullYear(), yearMode = false) {
-    let prevValueMonth = Number(monthNum) - 1
-    let prevValueYear = Number(yearNum)
-    if (prevValueMonth === 0) {
-        prevValueYear--
-        prevValueMonth = 12
-    }
-    const curPeriod = yearNum + "-" + monthNum.toString().padStart(2, '0')
-    const prevMonth = prevValueYear + "-" + prevValueMonth.toString().padStart(2, '0')
-    const prevYear = (Number(yearNum) - 1) + "-" + monthNum.toString().padStart(2, '0')
-
-    const prevPeriod = yearMode ? prevYear : prevMonth
+    let {curPeriod, prevPeriod} = getPrevAndCurPeriods(monthNum, yearNum, yearMode)
 
     const dataByPeriod = {
         prevPeriod: getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)),
