@@ -66,7 +66,11 @@ const barPalette = [
     '#26C6DA', '#81D4FA',
 ]
 
-export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year = new Date().getFullYear().toString()) {
+export function getMonthlyExpenses(
+    month = new Date().toJSON().slice(5, 7), 
+    year = new Date().getFullYear().toString(),
+    byCategory = ""
+    ) {
 
     const file = getFile()
     const transactions = file
@@ -89,15 +93,17 @@ export function getMonthlyExpenses(month = new Date().toJSON().slice(5, 7), year
             }
         })
         .filter(trs => trs.opex === 'опер' && trs.month === month && trs.year === year && !(trs.category === 'прочее' && trs.subCategory === 'мать'))
+        // if argument subcategory exists do filter
+        .filter(trs => byCategory === "" ? true : trs.category === byCategory)
         .reduce((acc, cur) => {
-            if (!acc[cur.category]) {
-                acc[cur['category']] = [];
+            if (!acc[cur[`${byCategory === "" ? 'category' : 'subCategory'}`]]) {
+                acc[cur[`${byCategory === "" ? 'category' : 'subCategory'}`]] = [];
             }
-            acc[cur['category']].push(cur);
+            acc[cur[`${byCategory === "" ? 'category' : 'subCategory'}`]].push(cur);
             return acc;
         }, {});
 
-    const totalsByCategory = Object.entries(transactions)
+        const totalsByCategory = Object.entries(transactions)
         .map(([title, arr]) => {
             return {
                 title,
@@ -133,11 +139,11 @@ function getPrevAndCurPeriods (month = (new Date().getMonth() + 1), year = new D
     }
 }
 
-export function getDataByPeriodSwiftUI(monthNum, yearNum, yearMode) {
+export function getDataByPeriodSwiftUI(monthNum, yearNum, yearMode, byCategory) {
     let {curPeriod, prevPeriod} = getPrevAndCurPeriods(monthNum, yearNum, yearMode)
 
     const dataByPeriod = {
-        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(({
+        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4), byCategory).map(({
             title,
             value,
             color,
@@ -146,7 +152,7 @@ export function getDataByPeriodSwiftUI(monthNum, yearNum, yearMode) {
             sum: value,
             date: prevPeriod
         }))],
-        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(({
+        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4), byCategory).map(({
             title,
             value,
             color,
@@ -162,11 +168,11 @@ export function getDataByPeriodSwiftUI(monthNum, yearNum, yearMode) {
     return barChartData
 }
 
-export function getChartDataset (barChartData, monthNum, yearNum, yearMode) {
+export function getChartDataset (barChartData, monthNum, yearNum, yearMode, byCategory) {
     let {curPeriod, prevPeriod} = getPrevAndCurPeriods(monthNum, yearNum, yearMode)
 
     const dataByPeriod = {
-        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4)).map(({
+        previousPeriod: [...getMonthlyExpenses(prevPeriod.slice(-2), prevPeriod.slice(0, 4), byCategory).map(({
             title,
             value,
             color,
@@ -175,7 +181,7 @@ export function getChartDataset (barChartData, monthNum, yearNum, yearMode) {
             sum: value,
             date: prevPeriod
         }))],
-        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4)).map(({
+        currentPeriod: [...getMonthlyExpenses(curPeriod.slice(-2), curPeriod.slice(0, 4), byCategory).map(({
             title,
             value,
             color,
@@ -191,7 +197,7 @@ export function getChartDataset (barChartData, monthNum, yearNum, yearMode) {
     const barChartDatalist = uniqCats.map((cat, _) => {
         return ({
             category: cat,
-            prevSum: dataByPeriod.previousPeriod.find(item => item.category === cat)?.sum ?? 0,
+            prevSum: byCategory ? 0: dataByPeriod.previousPeriod.find(item => item.category === cat)?.sum ?? 0,
             curSum: dataByPeriod.currentPeriod.find(item => item.category === cat)?.sum ?? 0,
         })
     }).sort((a,b) => (b.curSum - b.prevSum) - (a.curSum - a.prevSum))

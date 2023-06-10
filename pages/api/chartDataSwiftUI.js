@@ -5,11 +5,11 @@ export default function chartDataSwiftUI(req, res) {
     const chartDataM = getDataByPeriodSwiftUI(month, year)
     const chartDataY = getDataByPeriodSwiftUI(month, year, true)
     res.status(201).json({
-        barChartData:{
+        chartData:{
             monthly: chartDataM,
             yearly: chartDataY,
         },
-        barChartDatalist: {
+        chartDatalist: {
             monthly: getChartDataset(chartDataM, month, year),
             yearly: getChartDataset(chartDataY, month, year, true),
         }
